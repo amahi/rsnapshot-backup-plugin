@@ -1,0 +1,3 @@
+= Amahi plugin RSnapshot Backups
+
+RSnapshot Backups plugin for the Amahi platform
