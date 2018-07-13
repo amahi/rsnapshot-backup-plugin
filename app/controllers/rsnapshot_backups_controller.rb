@@ -20,6 +20,12 @@ class RsnapshotBackupsController < ApplicationController
 	end
 
 	def update_backup_directory
-		Rails.logger.info("\n\n\nhi, there\n #{params.as_json}")
+		dest_path = params[:destination_path]
+		if RsnapshotHelper.path_format_checker(dest_path)
+			RsnapshotHelper.update_conf("snapshot_root", dest_path)
+			render :json => {success: true, set_path: dest_path}
+		else
+			render :json => {success: false, message: "path not exist or inappropriate format."}
+		end
 	end
 end

@@ -4,6 +4,7 @@
 
   = form_tag rsnapshot_backups_engine.set_backup_directory_path,\
       :method => :post,\
+      :remote => true,\
       :class => 'destination_form',\
       :id => 'destination_form_id' do |f|
 	    = text_field_tag 'destination_path', "#{@dest_path[0][0]}", :placeholder => 'Select Destination Path',:class=>'form-control input-sm increase-length-40', :style=>'display: inline-block; margin-right: 8px;'

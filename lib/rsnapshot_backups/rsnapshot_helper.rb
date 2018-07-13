@@ -142,11 +142,16 @@ class RsnapshotHelper
 			data = get_parsed_sample_file
 			response = []
 			data.each do |obj|
-				if obj.keys[0].to_s==key.to_s
+				if obj.keys[0].to_s == key.to_s
 					response << obj.values[0]
 				end
 			end
 			response
+		end
+
+		def path_format_checker(path)
+			return false unless path[0]=="/" and path[path.length-1]=="/"
+			return File.exists?(path)
 		end
 	end
 end
