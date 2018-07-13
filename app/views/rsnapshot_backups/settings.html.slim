@@ -5,8 +5,8 @@
   = form_tag rsnapshot_backups_engine.set_backup_directory_path,\
       :method => :post,\
       :remote => true,\
-      :class => 'destination_form',\
-      :id => 'destination_form_id' do |f|
+      :class => 'backup_destination_form',\
+      :id => 'backup_destination_form_id' do |f|
 	    = text_field_tag 'destination_path', "#{@dest_path[0][0]}", :placeholder => 'Select Destination Path',:class=>'form-control input-sm increase-length-40', :style=>'display: inline-block; margin-right: 8px;'
 	    input type="submit"
 
@@ -15,13 +15,17 @@ br
   span.title
     | Select all paths for creating backups
 
-- @backup_paths.each do |backup_path|
-  = form_tag rsnapshot_backups_engine.set_backup_directory_path,\
+  = form_tag rsnapshot_backups_engine.set_backup_sources_path,\
       :method => :post,\
-      :class => 'destination_form',\
-      :id => 'destination_form_id' do |f|
-	    = text_field_tag 'destination_path', "#{backup_path[0]}", :placeholder => 'Select Backup Path',:class=>'form-control input-sm increase-length-40', :style=>'display: inline-block; margin-right: 8px;'
-	    input type="submit"
-	    input type="button" value="Delete" style="display: inline-block; margin-left: 8px;"
+      :remote => true,\
+      :class => 'backup_sources_form',\
+      :id => 'backup_sources_form_id' do |f|
 
-input type="button" value="Add new backup" style="display: inline-block; margin-top: 16px;"
+      - @backup_paths.each do |backup_path|
+        = text_field_tag 'backup_sources[]', "#{backup_path[0]}", :placeholder => 'Select Backup Path',:class=>'form-control input-sm increase-length-40', :style=>'display: inline-block; margin-right: 8px;'
+        input type="button" value="Delete" style="display: inline-block; margin-left: 8px;"
+        br
+
+      br
+      input type="submit"
+      input type="button" value="Add new backup" style="display: inline-block; margin-left: 8px;"

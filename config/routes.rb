@@ -6,4 +6,5 @@ RsnapshotBackups::Engine.routes.draw do
 	match 'advanced' => 'rsnapshot_backups#advanced',:via => :all
 
 	post 'set_backup_directory' => 'rsnapshot_backups#update_backup_directory'
+	post 'set_backup_sources' => 'rsnapshot_backups#update_backup_sources'
 end

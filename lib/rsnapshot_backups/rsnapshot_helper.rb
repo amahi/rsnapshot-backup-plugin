@@ -25,8 +25,18 @@ class RsnapshotHelper
 			end
 
 			unless already_present
+				append_string = ""
+				if value.class == Array
+					append_string = "#{key}"
+					value.each do |val|
+						append_string = append_string+"\t#{val}"
+					end
+				else
+					append_string = "#{key}\t#{value}"
+				end
+
 				open(file_path, 'a') do |f|
-					f.puts "#{key}\t#{value}"
+					f.puts append_string
 				end
 			end
 		end
@@ -102,6 +112,32 @@ class RsnapshotHelper
 			end
 		end
 
+		# funct to delete existing key-value in conf file if that key is present
+		def delete_conf(key)
+			file_path = get_sample_config_file_path
+			data = get_parsed_sample_file
+			return false if data.blank?
+
+			lines_to_update = []
+
+			data.each do |obj|
+				obj_key = obj.keys[0]
+				obj_value = obj.values[0]
+
+				if obj_key.to_s == key.to_s
+					lines_to_update << obj
+				end
+			end
+
+			unless lines_to_update.blank?
+				lines = File.readlines(file_path)
+				lines_to_update.each do |line|
+					lines[line[:line_num]-1] = ""
+				end
+				File.open(file_path, 'w') { |f| f.write(lines.join) }
+			end
+		end
+
 		def get_parsed_config_file
 			parse_config_file(get_config_file_path)
 		end
@@ -149,9 +185,17 @@ class RsnapshotHelper
 			response
 		end
 
-		def path_format_checker(path)
-			return false unless path[0]=="/" and path[path.length-1]=="/"
-			return File.exists?(path)
+		def path_format_checker(paths)
+			if paths.class == Array
+				paths.each do |path|
+					return false unless path[0]=="/" and path[path.length-1]=="/"
+					return false unless File.exists?(path)
+				end
+				return true
+			else
+				return false unless paths[0]=="/" and paths[paths.length-1]=="/"
+				return File.exists?(paths)
+			end
 		end
 	end
 end

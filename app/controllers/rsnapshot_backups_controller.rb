@@ -28,4 +28,19 @@ class RsnapshotBackupsController < ApplicationController
 			render :json => {success: false, message: "path not exist or inappropriate format."}
 		end
 	end
+
+	def update_backup_sources
+		sources = params[:backup_sources]
+		if RsnapshotHelper.path_format_checker(sources)
+			RsnapshotHelper.delete_conf("backup")
+
+			sources.each do |source|
+				RsnapshotHelper.add_conf("backup", [source, "localhost/"])
+			end
+
+			render :json => {success: true, message: "backup paths set successfully."}
+		else
+			render :json => {success: false, message: "one or more paths does not exist or have inappropriate format."}
+		end
+	end
 end
