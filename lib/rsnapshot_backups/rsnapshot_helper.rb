@@ -1,12 +1,121 @@
-class SmartTestUtil
+class RsnapshotHelper
 	class << self
+	    # funct to add new key-value in conf file if not present already
+		def add_conf(key, value)
+			file_path = get_sample_config_file_path
+			data = get_parsed_sample_file
+			return false if data.blank?
+
+			already_present = false
+
+			data.each do |obj|
+				obj_key = obj.keys[0]
+				obj_value = obj.values[0]
+
+				if obj_key.to_s == key.to_s
+					obj_value.each do |v|
+						if v.to_s == value.to_s
+							already_present = true
+							break
+						end
+					end
+				end
+
+				break if already_present
+			end
+
+			unless already_present
+				open(file_path, 'a') do |f|
+					f.puts "#{key}\t#{value}"
+				end
+			end
+		end
+
+		# funct to update a value of particular key in conf file. if that key is not present then the key-value pair will be added at bottom of the conf file
+		def update_conf(key, value)
+			file_path = get_sample_config_file_path
+			data = get_parsed_sample_file
+			return false if data.blank?
+
+			already_present = false
+			line_to_update = nil
+
+			data.each do |obj|
+				obj_key = obj.keys[0]
+				obj_value = obj.values[0]
+
+				if obj_key.to_s == key.to_s
+					line_to_update = obj
+
+					obj_value.each do |v|
+						if v.to_s == value.to_s
+							already_present = true
+							break
+						end
+					end
+				end
+
+				return if already_present
+			end
+
+			if line_to_update.blank?
+				open(file_path, 'a') do |f|
+					f.puts "#{key}\t#{value}"
+				end
+			else
+				lines = File.readlines(file_path)
+				lines[line_to_update[:line_num]-1] = "#{key}\t#{value}\n"
+				File.open(file_path, 'w') { |f| f.write(lines.join) }
+			end
+		end
+
+		# funct to delete existing key-value in conf file if present
+		def delete_conf(key, value)
+			file_path = get_sample_config_file_path
+			data = get_parsed_sample_file
+			return false if data.blank?
+
+			already_present = false
+			line_to_update = nil
+
+			data.each do |obj|
+				obj_key = obj.keys[0]
+				obj_value = obj.values[0]
+
+				if obj_key.to_s == key.to_s
+					obj_value.each do |v|
+						if v.to_s == value.to_s
+							already_present = true
+							line_to_update = obj
+							break
+						end
+					end
+				end
+
+				break if already_present
+			end
+
+			if already_present
+				lines = File.readlines(file_path)
+				lines[line_to_update[:line_num]-1] = ""
+				File.open(file_path, 'w') { |f| f.write(lines.join) }
+			end
+		end
+
 		def get_parsed_config_file
-			parse_config_file("/etc/rsnapshot.conf")
+			parse_config_file(get_config_file_path)
+		end
+
+		def get_config_file_path
+			"/etc/rsnapshot.conf"
 		end
 
 		def get_parsed_sample_file
-			path = Rails.root+Dir["plugins/*rsnapshot_backups/db/sample-data/sample_rsnapshot.conf"][0]
-			parse_config_file(path)
+			parse_config_file(get_sample_config_file_path)
+		end
+
+		def get_sample_config_file_path
+			Rails.root+Dir["plugins/*rsnapshot_backups/db/sample-data/sample_rsnapshot.conf"][0]
 		end
 
 		def parse_config_file(file_path)
@@ -23,7 +132,7 @@ class SmartTestUtil
 				temp[temp.length-1] = temp[temp.length-1].chomp
 				temp.delete("")
 
-				data << {"#{key}": temp}
+				data << {"#{key}": temp, line_num: num+1}
 			end
 
 			data
