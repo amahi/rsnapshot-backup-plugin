@@ -2,8 +2,8 @@ class RsnapshotHelper
 	class << self
 	    # funct to add new key-value in conf file if not present already
 		def add_conf(key, value)
-			file_path = get_sample_config_file_path
-			data = get_parsed_sample_file
+			file_path = get_config_file_path
+			data = get_parsed_config_file
 			return false if data.blank?
 
 			already_present = false
@@ -35,16 +35,14 @@ class RsnapshotHelper
 					append_string = "#{key}\t#{value}"
 				end
 
-				open(file_path, 'a') do |f|
-					f.puts append_string
-				end
+				reflect_to_file(-1, append_string)
 			end
 		end
 
 		# funct to update a value of particular key in conf file. if that key is not present then the key-value pair will be added at bottom of the conf file
 		def update_conf(key, value)
-			file_path = get_sample_config_file_path
-			data = get_parsed_sample_file
+			file_path = get_config_file_path
+			data = get_parsed_config_file
 			return false if data.blank?
 
 			already_present = false
@@ -69,20 +67,16 @@ class RsnapshotHelper
 			end
 
 			if line_to_update.blank?
-				open(file_path, 'a') do |f|
-					f.puts "#{key}\t#{value}"
-				end
+				reflect_to_file(-1, "#{key}\t#{value}")
 			else
-				lines = File.readlines(file_path)
-				lines[line_to_update[:line_num]-1] = "#{key}\t#{value}\n"
-				File.open(file_path, 'w') { |f| f.write(lines.join) }
+				reflect_to_file(line_to_update[:line_num], "#{key}\t#{value}\n")
 			end
 		end
 
 		# funct to delete existing key-value in conf file if present
 		def delete_conf(key, value)
-			file_path = get_sample_config_file_path
-			data = get_parsed_sample_file
+			file_path = get_config_file_path
+			data = get_parsed_config_file
 			return false if data.blank?
 
 			already_present = false
@@ -106,16 +100,14 @@ class RsnapshotHelper
 			end
 
 			if already_present
-				lines = File.readlines(file_path)
-				lines[line_to_update[:line_num]-1] = ""
-				File.open(file_path, 'w') { |f| f.write(lines.join) }
+				reflect_to_file(line_to_update[:line_num], "")
 			end
 		end
 
 		# funct to delete existing key-value in conf file if that key is present
 		def delete_conf(key)
-			file_path = get_sample_config_file_path
-			data = get_parsed_sample_file
+			file_path = get_config_file_path
+			data = get_parsed_config_file
 			return false if data.blank?
 
 			lines_to_update = []
@@ -130,11 +122,9 @@ class RsnapshotHelper
 			end
 
 			unless lines_to_update.blank?
-				lines = File.readlines(file_path)
 				lines_to_update.each do |line|
-					lines[line[:line_num]-1] = ""
+					reflect_to_file(line[:line_num], "")
 				end
-				File.open(file_path, 'w') { |f| f.write(lines.join) }
 			end
 		end
 
@@ -175,7 +165,7 @@ class RsnapshotHelper
 		end
 
 		def get_fields(key)
-			data = get_parsed_sample_file
+			data = get_parsed_config_file
 			response = []
 			data.each do |obj|
 				if obj.keys[0].to_s == key.to_s
@@ -196,6 +186,10 @@ class RsnapshotHelper
 				return false unless paths[0]=="/" and paths[paths.length-1]=="/"
 				return File.exists?(paths)
 			end
+		end
+
+		def reflect_to_file(line_num, line)
+			`sudo /var/hda/apps/03qjfjl1sh/elevated/update-conf-file #{line_num} #{line}`
 		end
 	end
 end
