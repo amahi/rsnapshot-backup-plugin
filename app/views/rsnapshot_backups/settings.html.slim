@@ -2,7 +2,25 @@
   span.title
     | Select path where backups will get stored
 
-  .custom-file
-    input.custom-file-input type="file" id="customFile"
-    label.custom-file-label for="customFile"
-      | Choose file
+  = form_tag rsnapshot_backups_engine.set_backup_directory_path,\
+      :method => :post,\
+      :class => 'destination_form',\
+      :id => 'destination_form_id' do |f|
+	    = text_field_tag 'destination_path', "#{@dest_path[0][0]}", :placeholder => 'Select Destination Path',:class=>'form-control input-sm increase-length-40', :style=>'display: inline-block; margin-right: 8px;'
+	    input type="submit"
+
+br
+.settings-table#tests-table
+  span.title
+    | Select all paths for creating backups
+
+- @backup_paths.each do |backup_path|
+  = form_tag rsnapshot_backups_engine.set_backup_directory_path,\
+      :method => :post,\
+      :class => 'destination_form',\
+      :id => 'destination_form_id' do |f|
+	    = text_field_tag 'destination_path', "#{backup_path[0]}", :placeholder => 'Select Backup Path',:class=>'form-control input-sm increase-length-40', :style=>'display: inline-block; margin-right: 8px;'
+	    input type="submit"
+	    input type="button" value="Delete" style="display: inline-block; margin-left: 8px;"
+
+input type="button" value="Add new backup" style="display: inline-block; margin-top: 16px;"

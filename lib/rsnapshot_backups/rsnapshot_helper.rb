@@ -137,5 +137,16 @@ class RsnapshotHelper
 
 			data
 		end
+
+		def get_fields(key)
+			data = get_parsed_sample_file
+			response = []
+			data.each do |obj|
+				if obj.keys[0].to_s==key.to_s
+					response << obj.values[0]
+				end
+			end
+			response
+		end
 	end
 end
