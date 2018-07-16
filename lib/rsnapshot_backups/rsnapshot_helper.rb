@@ -69,7 +69,7 @@ class RsnapshotHelper
 			if line_to_update.blank?
 				reflect_to_file(-1, "#{key}\t#{value}")
 			else
-				reflect_to_file(line_to_update[:line_num], "#{key}\t#{value}\n")
+				reflect_to_file(line_to_update[:line_num], "#{key}\t#{value}")
 			end
 		end
 
@@ -189,7 +189,9 @@ class RsnapshotHelper
 		end
 
 		def reflect_to_file(line_num, line)
-			`sudo /var/hda/apps/03qjfjl1sh/elevated/update-conf-file #{line_num} #{line}`
+			line = line.gsub("/","\\/")
+			`sudo /var/hda/apps/03qjfjl1sh/elevated/update-conf-file #{line_num} '#{line}'`
 		end
 	end
 end
+
