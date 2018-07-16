@@ -1,31 +1,48 @@
-.settings-table#tests-table
-  span.title
-    | Select path where backups will get stored
+.settings-stretcher
+  .share-manage.collapsed-div-style
+      fieldset
+        legend
+          | Edit Rsnapshot Settings
 
-  = form_tag rsnapshot_backups_engine.set_backup_directory_path,\
-      :method => :post,\
-      :remote => true,\
-      :class => 'backup_destination_form',\
-      :id => 'backup_destination_form_id' do |f|
-	    = text_field_tag 'destination_path', "#{@dest_path[0][0]}", :placeholder => 'Select Destination Path',:class=>'form-control input-sm increase-length-40', :style=>'display: inline-block; margin-right: 8px;'
-	    input type="submit"
+        .settings-fields
+          table
+            tr
+              td style="width: 200px;"
+                label #{"Path to Store Backups"}
+              td
+        span.open-backup-destination-path.focus style="display:inline-block; width: 100%;" = "#{@dest_path[0][0]}"
+        .edit-backup-destination-div style="display: none;"
+          = form_tag rsnapshot_backups_engine.set_backup_directory_path,\
+          :method => :post,\
+          :remote => true,\
+          :class => 'backup_destination_form',\
+          :id => 'backup_destination_form_id' do |f|
+            = text_field_tag 'destination_path', "#{@dest_path[0][0]}", :placeholder => 'Select Destination Path',:class=>'form-control input-sm increase-length-40', :style=>'display: inline-block; margin-right: 8px; '
+            input type="submit"
+            = link_to t('cancel'), '#', :class => 'close-backup-destination-form cancel-link cancel-btn-style btn-sm'
 
-br
-.settings-table#tests-table
-  span.title
-    | Select all paths for creating backups
+            tr
+              td
+                label #{"Backup Paths"}
+              td
+                = form_tag rsnapshot_backups_engine.set_backup_directory_path,\
+                    :method => :post,\
+                    :remote => true,\
+                    :class => 'backup_source_form'
+                        - @backup_paths.each do |backup_path|
+                            .open-backup-source-path.focus
+                                span = "#{backup_path[0]}"
+                                br
+                            .edit-backup-source-div style="display: none;"
+                                = text_field_tag 'source_path_input', "#{backup_path[0]}", :placeholder => 'Select Source Path', :class=>'form-control input-sm increase-length-40', :style=>'display: inline-block; margin-right: 8px;'
+                                = theme_image_tag("delete.png", :class => "delete-source-path", :style => "cursor: pointer")
+                            br.field-breaks style="display:none;"
 
-  = form_tag rsnapshot_backups_engine.set_backup_sources_path,\
-      :method => :post,\
-      :remote => true,\
-      :class => 'backup_sources_form',\
-      :id => 'backup_sources_form_id' do |f|
+                .source-control-buttons style="display: none;"
+                    br
+                    button.btnn.btn.btn-info.submit-update-source-paths name="submit-button" type="button"  = "Update Paths"
+                    button.btnn.btn.btn-info.add-source-path.ml-2 name="add-path-button" type="button" = "Add New Path"
+                    = link_to t('cancel'), '#', :class => 'close-backup-source-form cancel-link cancel-btn-style btn-sm'
 
-      - @backup_paths.each do |backup_path|
-        = text_field_tag 'backup_sources[]', "#{backup_path[0]}", :placeholder => 'Select Backup Path',:class=>'form-control input-sm increase-length-40', :style=>'display: inline-block; margin-right: 8px;'
-        input type="button" value="Delete" style="display: inline-block; margin-left: 8px;"
-        br
+= javascript_include_tag 'rsnapshot_backups'
 
-      br
-      input type="submit"
-      input type="button" value="Add new backup" style="display: inline-block; margin-left: 8px;"
