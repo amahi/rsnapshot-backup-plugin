@@ -117,7 +117,7 @@ class RsnapshotHelper
 				obj_value = obj.values[0]
 
 				if obj_key.to_s == key.to_s
-					lines_to_update << obj
+					lines_to_update.unshift(obj)
 				end
 			end
 
