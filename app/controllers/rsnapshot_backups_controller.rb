@@ -30,7 +30,7 @@ class RsnapshotBackupsController < ApplicationController
 	end
 
 	def update_backup_sources
-		sources = params[:backup_sources]
+		sources = params[:source_path_input]
 		if RsnapshotHelper.path_format_checker(sources)
 			RsnapshotHelper.delete_conf("backup")
 

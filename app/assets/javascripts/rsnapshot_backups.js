@@ -37,9 +37,10 @@ $(document).on('click', '.open-backup-source-path', function(event) {
 $(document).on('click', '.delete-source-path', function(event) {
 	var current = event.target;
 	var parent = current.parentElement;
-	parent.nextSibling.remove();
-	parent.previousSibling.remove();
-	parent.remove();
+	parent.nextSibling.style.display="none";
+	current.previousSibling.name="temp-remove"; // to prevent this input from sending via post request
+	current.previousSibling.className+=" temp-remove"
+	parent.style.display="none";
 });
 
 $(document).on('click', '.close-backup-source-form', function(event) {
@@ -49,7 +50,7 @@ $(document).on('click', '.close-backup-source-form', function(event) {
 	parent.style.display = "none";
 
 	var temps = parent.parentElement.getElementsByClassName("temp");
-	for(var i=0;i<temps.length;i++){
+	for(var i=temps.length-1;i>=0;i--){
 		temps[i].remove();
 	}
 
@@ -64,6 +65,12 @@ $(document).on('click', '.close-backup-source-form', function(event) {
 	var breaks = parent.parentElement.getElementsByClassName("field-breaks");
 	for(var i=0;i<breaks.length;i++){
 		//breaks[i].style.display="none";
+	}
+	var temp_removes = parent.parentElement.getElementsByClassName("temp-remove");
+	for(var i=0;i<temp_removes.length;i++){
+		temp_removes[i].parentElement.nextSibling.style.display="inline-block";
+		temp_removes[i].name="source_path_input[]";
+		temp_removes[i].className=temp_removes[i].className.replace(" temp-remove", "");
 	}
 });
 
