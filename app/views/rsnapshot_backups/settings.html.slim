@@ -18,7 +18,7 @@
                   :class => 'backup_destination_form',\
                   :id => 'backup_destination_form_id' do |f|
                     = text_field_tag 'destination_path', "#{@dest_path[0][0]}", :placeholder => 'Select Destination Path', :class=>'form-control input-sm increase-length-40', :style=>'display: inline-block; margin-right: 8px; '
-                    input type="submit"
+                    input type="submit" style="cursor:pointer"
                     = link_to t('cancel'), '#', :class => 'close-backup-destination-form cancel-link cancel-btn-style btn-sm'
 
             tr
@@ -48,9 +48,20 @@
               td
                 label #{"Interval"}
               td
-                = simple_remote_radio({:checked => true, :name => "interval_radio", :class => "interval_radio_button mb-2", :value => "Daily"})
-                = simple_remote_radio({:name => "interval_radio", :css_class => "interval_radio_button mb-2", :value => "Hourly"})
-                = simple_remote_radio({:name => "interval_radio", :css_class => "interval_radio_button mb-2", :value => "Weekly"})
+                = form_tag rsnapshot_backups_engine.set_interval_path,\
+                    :method => :post,\
+                    :remote => true,\
+                    :class => 'backup_source_form'
+                        input name="interval" value="daily" type="radio" checked="checked"
+                          span.position-absolute.pl-2 Daily
+                          br
+                        input name="interval" value="hourly" type="radio"
+                          span.position-absolute.pl-2 Hourly
+                          br
+                        input name="interval" value="weekly" type="radio"
+                          span.position-absolute.pl-2 Weekly
+                          br
+                          br
+                        input type="submit" style="cursor:pointer"
 
 = javascript_include_tag 'rsnapshot_backups'
-

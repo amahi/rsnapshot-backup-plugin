@@ -192,6 +192,7 @@ class RsnapshotHelper
 			line = line.gsub("/","\\/")
 			`sudo /var/hda/apps/03qjfjl1sh/elevated/update-conf-file #{line_num} '#{line}'`
 		end
+
 	end
 end
 

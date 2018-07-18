@@ -43,4 +43,8 @@ class RsnapshotBackupsController < ApplicationController
 			render :json => {success: false, message: "one or more paths does not exist or have inappropriate format."}
 		end
 	end
+
+	def update_interval
+		
+	end
 end
