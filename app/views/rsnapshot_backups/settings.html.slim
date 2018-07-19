@@ -39,10 +39,9 @@
                             br.field-breaks style="display:none;"
 
                         .source-control-buttons style="display: none;"
-                            br 
-                            button.btnn.btn.btn-info.submit-update-source-paths name="submit-button" type="submit"  = "Update Paths"
-                            button.btnn.btn.btn-info.add-source-path.ml-2 name="add-path-button" type="button" = "Add New Path"
-                            = link_to t('cancel'), '#', :class => 'close-backup-source-form cancel-link cancel-btn-style btn-sm'
+                            button.btnn.btn.btn-info.submit-update-source-paths.mt-1 name="submit-button" type="submit"  = "Update Paths"
+                            button.btnn.btn.btn-info.add-source-path.ml-2.mt-1 name="add-path-button" type="button" = "Add New Path"
+                            = link_to t('cancel'), '#', :class => 'close-backup-source-form cancel-link cancel-btn-style btn-sm mt-1'
 
             tr
               td
@@ -61,7 +60,6 @@
                         input name="interval" value="weekly" type="radio"
                           span.position-absolute.pl-2 Weekly
 
-          input.mt-2.mb-2 type="button" style="cursor:pointer; margin-left:72px;" value="#{ true ? 'Start Automatic Backups': 'Stop Automatic Backups'}"
+                input.p-2.pl-3.pr-3.mt-2 type="button" style="cursor:pointer;" value="#{ true ? 'Start Automatic Backups': 'Stop Automatic Backups'}"
 
 = javascript_include_tag 'rsnapshot_backups'
-
