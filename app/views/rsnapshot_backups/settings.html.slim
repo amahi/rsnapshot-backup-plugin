@@ -60,8 +60,8 @@
                           br
                         input name="interval" value="weekly" type="radio"
                           span.position-absolute.pl-2 Weekly
-                          br
-                          br
-                        input type="submit" style="cursor:pointer"
+
+          input.mt-2.mb-2 type="button" style="cursor:pointer; margin-left:72px;" value="#{ true ? 'Start Automatic Backups': 'Stop Automatic Backups'}"
 
 = javascript_include_tag 'rsnapshot_backups'
+
