@@ -1,3 +1,18 @@
-div.no-content
-  strong
-    | Index area
+.settings-stretcher
+  .share-manage.collapsed-div-style.p-3
+    - if false
+      .jumbotron.m-3
+        p.h6 Rsnapshot based automatic backups is not running.
+        p.h6 You need to do some configuration changes to make it back to running state.
+        form.mt-3 action="/tab/rsnapshot_backups/settings"
+          button.btnn.btn.btn-info type="submit" = "Edit Configurations"
+    - else
+        - 4.times do |count|
+          span.text-underline.h5 ="Backup # #{count+1}"
+          br
+          span Backup Date: 19 July, 2018
+          br
+          span Status: Success
+          br
+          div.alert.alert-info.mt-2 role="alert"
+            span Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
