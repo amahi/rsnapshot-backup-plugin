@@ -57,6 +57,7 @@ $(document).on('click', '.close-backup-source-form', function(event) {
 	var labels = parent.parentElement.getElementsByClassName("open-backup-source-path");
 	for(var i=0;i<labels.length;i++){
 		labels[i].style.display="inline-block";
+		labels[i].style.width="100%";
 	}
 	var fields = parent.parentElement.getElementsByClassName("edit-backup-source-div");
 	for(var i=0;i<fields.length;i++){
@@ -78,7 +79,7 @@ $(document).on('click', '.add-source-path', function(event) {
 	var current = event.target;
 	var parent = current.parentElement;
 	var node = document.createElement('div');
-	node.innerHTML = "<div class='open-backup-source-path temp focus' style='background-color: transparent; display: none;'><span></span><br></div> <div class='edit-backup-source-div temp' style='display: inline-block;'><input type='text' name='source_path_input[]' id='source_path_input' value='' placeholder='Select Source Path' class='form-control input-sm increase-length-40' style='display: inline-block; margin-right: 8px;'><img src='/themes/default/images/delete.png' class='delete-source-path' style='cursor: pointer'></div> <br class='field-breaks temp' style='display: inline-block;'>";
+	node.innerHTML = "<div class='open-backup-source-path temp focus' style='background-color: transparent; width: 100%; display: none;'><span></span><br></div> <div class='edit-backup-source-div temp' style='display: inline-block;'><input type='text' name='source_path_input[]' id='source_path_input' value='' placeholder='Select Source Path' class='form-control input-sm increase-length-40' style='display: inline-block; margin-right: 8px;'><img src='/themes/default/images/delete.png' class='delete-source-path' style='cursor: pointer'></div> <br class='field-breaks temp' style='display: inline-block;'>";
 
 	for(var i=0; i< node.childNodes.length; i++){
 		parent.parentElement.insertBefore(node.childNodes[i], parent);
