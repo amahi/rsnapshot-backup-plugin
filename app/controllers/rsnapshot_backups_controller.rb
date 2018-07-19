@@ -14,11 +14,6 @@ class RsnapshotBackupsController < ApplicationController
 		@backup_paths = RsnapshotHelper.get_fields("backup")
 	end
 
-	def advanced
-		@page_title = t('rsnapshot_backups')
-		# do the advanced settings page here
-	end
-
 	def update_backup_directory
 		dest_path = params[:destination_path]
 		if RsnapshotHelper.path_format_checker(dest_path)
