@@ -1,6 +1,6 @@
 .settings-stretcher
   .share-manage.collapsed-div-style.p-3
-    - if false
+    - if @cron_job_status
       .jumbotron.m-3
         p.h6 Rsnapshot based automatic backups is not running.
         p.h6 You need to do some configuration changes to make it back to running state.
