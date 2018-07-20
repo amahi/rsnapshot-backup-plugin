@@ -27,7 +27,7 @@ class CronTabHelper
 		end
 
 		def add_to_crontab(cron_string)
-			`crontab -l | { cat; echo '#{cron_string}'; } | crontab -`
+			`sudo crontab -l | { cat; echo '#{cron_string}'; } | crontab -`
 		end
 
 		def convert_to_readable_format(cron_string)

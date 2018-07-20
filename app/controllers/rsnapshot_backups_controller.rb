@@ -43,6 +43,7 @@ class RsnapshotBackupsController < ApplicationController
 	end
 
 	def update_interval
-		
+		CronTabHelper.add_cron(params[:interval])
 	end
+
 end
