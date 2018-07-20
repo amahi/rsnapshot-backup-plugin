@@ -5,7 +5,7 @@ class RsnapshotBackupsController < ApplicationController
 
 	def index
 		@page_title = t('rsnapshot_backups')
-		# do your main thing here
+		RsnapshotHelper.run_init_script if RsnapshotHelper.first_time_setup
 	end
 
 	def settings

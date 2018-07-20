@@ -193,6 +193,15 @@ class RsnapshotHelper
 			`sudo /var/hda/apps/03qjfjl1sh/elevated/update-conf-file #{line_num} '#{line}'`
 		end
 
+		def first_time_setup
+			Rails.cache.read("rsnapshot-first-time").blank?
+		end
+
+		def run_init_script
+			Rails.cache.write("rsnapshot-first-time",true)
+			`sudo /var/hda/apps/03qjfjl1sh/elevated/init-script`
+		end
+
 	end
 end
 
