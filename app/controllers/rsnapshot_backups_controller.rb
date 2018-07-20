@@ -1,4 +1,5 @@
 require "rsnapshot_backups/rsnapshot_helper.rb"
+require "rsnapshot_backups/crontab_helper.rb"
 
 class RsnapshotBackupsController < ApplicationController
 	before_action :admin_required
@@ -6,12 +7,14 @@ class RsnapshotBackupsController < ApplicationController
 	def index
 		@page_title = t('rsnapshot_backups')
 		RsnapshotHelper.run_init_script if RsnapshotHelper.first_time_setup
+		@cron_job_status = CronTabHelper.check_status
 	end
 
 	def settings
 		@page_title = t('rsnapshot_backups')
 		@dest_path = RsnapshotHelper.get_fields("snapshot_root")
 		@backup_paths = RsnapshotHelper.get_fields("backup")
+		@cron_job_status = CronTabHelper.check_status
 	end
 
 	def update_backup_directory

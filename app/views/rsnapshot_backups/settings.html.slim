@@ -60,6 +60,6 @@
                         input name="interval" value="weekly" type="radio"
                           span.position-absolute.pl-2 Weekly
 
-                input.p-2.pl-3.pr-3.mt-2 type="button" style="cursor:pointer;" value="#{ true ? 'Start Automatic Backups': 'Stop Automatic Backups'}"
+                input.p-2.pl-3.pr-3.mt-2 type="button" style="cursor:pointer;" value="#{ @cron_job_status ? 'Start Automatic Backups': 'Stop Automatic Backups'}"
 
 = javascript_include_tag 'rsnapshot_backups'

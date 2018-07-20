@@ -194,11 +194,11 @@ class RsnapshotHelper
 		end
 
 		def first_time_setup
-			Rails.cache.read("rsnapshot-first-time").blank?
+			File.open(get_config_file_path).grep(/03qjfjl1sh/).size >= 1
 		end
 
 		def run_init_script
-			Rails.cache.write("rsnapshot-first-time",true)
+			reflect_to_file(-1, "# file edited by app-id: 03qjfjl1sh")
 			`sudo /var/hda/apps/03qjfjl1sh/elevated/init-script`
 		end
 
