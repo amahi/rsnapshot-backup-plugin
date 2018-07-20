@@ -1,7 +1,7 @@
 class CronTabHelper
 	class << self
 		def check_status
-			list = `sudo crontab -l`
+			list = get_cron_list
 			list.include? "rsnapshot"
 		end
 
@@ -17,17 +17,21 @@ class CronTabHelper
 		end
 
 		def remove_cron
-			list = `sudo crontab -l`
+			list = get_cron_list
 			enteries = list.split("\n")
 			enteries.delete_if {|entry| entry.include? "rsnapshot"}
-			`sudo crontab -r`
+			`sudo /var/hda/apps/03qjfjl1sh/elevated/crontab-util 'reset'`
 			enteries.each do |entry|
 				add_to_crontab(entry)
 			end
 		end
 
+		def get_cron_list
+			`sudo /var/hda/apps/03qjfjl1sh/elevated/crontab-util 'list'`
+		end
+
 		def add_to_crontab(cron_string)
-			`crontab -l | { cat; echo '#{cron_string}'; } | crontab -`
+			`sudo /var/hda/apps/03qjfjl1sh/elevated/crontab-util 'add' '#{cron_string}'`
 		end
 
 		def convert_to_readable_format(cron_string)
