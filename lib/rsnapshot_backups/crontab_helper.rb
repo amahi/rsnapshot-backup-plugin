@@ -34,6 +34,14 @@ class CronTabHelper
 			`sudo /var/hda/apps/03qjfjl1sh/elevated/crontab-util 'add' '#{cron_string}'`
 		end
 
+		def get_cron_interval
+			list = get_cron_list
+			enteries = list.split("\n")
+			enteries.each do |entry|
+				return convert_to_readable_format(entry) if entry.include? "rsnapshot"
+			end
+		end
+
 		def convert_to_readable_format(cron_string)
 			if cron_string.include? "0 * * * *"
 				return "hourly"

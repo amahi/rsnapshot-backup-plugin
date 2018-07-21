@@ -15,6 +15,7 @@ class RsnapshotBackupsController < ApplicationController
 		@dest_path = RsnapshotHelper.get_fields("snapshot_root")
 		@backup_paths = RsnapshotHelper.get_fields("backup")
 		@cron_job_status = CronTabHelper.check_status
+		@current_interval = @cron_job_status? CronTabHelper.get_cron_interval : nil
 	end
 
 	def update_backup_directory
@@ -44,6 +45,10 @@ class RsnapshotBackupsController < ApplicationController
 
 	def update_interval
 		CronTabHelper.add_cron(params[:interval])
+	end
+
+	def stop_automatic_backup
+		CronTabHelper.remove_cron
 	end
 
 end

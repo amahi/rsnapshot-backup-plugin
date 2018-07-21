@@ -47,20 +47,46 @@
               td
                 label #{"Interval"}
               td
-                = form_tag rsnapshot_backups_engine.set_interval_path,\
-                    :method => :post,\
-                    :remote => true,\
-                    :class => 'backup_source_form'
-                        input name="interval" value="daily" type="radio" checked="checked"
-                          span.position-absolute.pl-2 Daily
-                          br
-                        input name="interval" value="hourly" type="radio"
-                          span.position-absolute.pl-2 Hourly
-                          br
-                        input name="interval" value="weekly" type="radio"
-                          span.position-absolute.pl-2 Weekly
+                - unless @cron_job_status
+                        = form_tag rsnapshot_backups_engine.set_interval_path,\
+                          :method => :post,\
+                          :remote => true,\
+                          :class => 'set_interval_form'
+                            input name="interval" value="daily" type="radio" checked="checked"
+                            span.position-absolute.pl-2 Daily
+                            br
+                            input name="interval" value="hourly" type="radio"
+                            span.position-absolute.pl-2 Hourly
+                            br
+                            input name="interval" value="weekly" type="radio"
+                            span.position-absolute.pl-2 Weekly
 
-                        br
-                        input.p-2.pl-3.pr-3.mt-2 type="submit" style="cursor:pointer;" value="#{ @cron_job_status ? 'Stop Automatic Backups': 'Start Automatic Backups'}"
+                            br
+                            input.p-2.pl-3.pr-3.mt-2 type="submit" style="cursor:pointer;" value="Start Automatic Backups"
+                - else
+                        = form_tag rsnapshot_backups_engine.stop_automatic_backup_path,\
+                          :method => :post,\
+                          :remote => true,\
+                          :class => 'stop_backup_form'
+                            - if @current_interval == "daily"
+                              input name="interval" value="daily" disabled="disabled" type="radio" checked="checked"
+                            - else
+                              input name="interval" value="daily" disabled="disabled" type="radio"
+                              span.position-absolute.pl-2 Daily
+                            br
+                            - if @current_interval == "hourly"
+                              input name="interval" value="hourly" disabled="disabled" type="radio" checked="checked"
+                            - else
+                              input name="interval" value="hourly" disabled="disabled" type="radio"
+                            span.position-absolute.pl-2 Hourly
+                            br
+                            - if @current_interval == "weekly"
+                              input name="interval" value="weekly" disabled="disabled" type="radio" checked="checked"
+                            - else
+                              input name="interval" value="weekly" disabled="disabled" type="radio"
+                            span.position-absolute.pl-2 Weekly
+
+                            br
+                            input.p-2.pl-3.pr-3.mt-2 type="submit" style="cursor:pointer;" value="Stop Automatic Backups"
 
 = javascript_include_tag 'rsnapshot_backups'
