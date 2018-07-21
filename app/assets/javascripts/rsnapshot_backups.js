@@ -86,3 +86,19 @@ $(document).on('click', '.add-source-path', function(event) {
 	}
 });
 
+$(document).on('ajax:success', '#backup_destination_form_id', function(event, results) {
+    console.log("ajax success1");
+});
+
+$(document).on('ajax:success', '#backup_source_form_id', function(event, results) {
+    console.log("ajax success2");
+});
+
+$(document).ready(function() {
+    $("#backup_destination_submit").click(function() {
+      this.previousSibling.style.display = "";
+    });
+    $("#submit-update-source-paths").click(function() {
+      this.previousSibling.style.display = "";
+    });
+});

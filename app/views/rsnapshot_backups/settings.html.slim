@@ -18,7 +18,8 @@
                   :class => 'backup_destination_form',\
                   :id => 'backup_destination_form_id' do |f|
                     = text_field_tag 'destination_path', "#{@dest_path[0][0]}", :placeholder => 'Select Destination Path', :class=>'form-control input-sm increase-length-40', :style=>'display: inline-block; margin-right: 8px; '
-                    input type="submit" style="cursor:pointer"
+                    = spinner "dest_update_spinner"
+                    input#backup_destination_submit type="submit" style="cursor:pointer"
                     = link_to t('cancel'), '#', :class => 'close-backup-destination-form cancel-link cancel-btn-style btn-sm'
 
             tr
@@ -28,6 +29,7 @@
                 = form_tag rsnapshot_backups_engine.set_backup_sources_path,\
                     :method => :post,\
                     :remote => true,\
+                    :id => 'backup_source_form_id',\
                     :class => 'backup_source_form'
                         - @backup_paths.each do |backup_path|
                             .open-backup-source-path.focus
@@ -39,9 +41,10 @@
                             br.field-breaks style="display:none;"
 
                         .source-control-buttons style="display: none;"
-                            button.btnn.btn.btn-info.submit-update-source-paths.mt-1 name="submit-button" type="submit"  = "Update Paths"
+                            = spinner "source_update_spinner"
+                            button.btnn.btn.btn-info.mt-1#submit-update-source-paths name="submit-button" type="submit"  = "Update Paths"
                             button.btnn.btn.btn-info.add-source-path.ml-2.mt-1 name="add-path-button" type="button" = "Add New Path"
-                            = link_to t('cancel'), '#', :class => 'close-backup-source-form cancel-link cancel-btn-style btn-sm mt-1'
+                            = link_to t('cancel'), '#', :class => 'align-middle close-backup-source-form cancel-link cancel-btn-style btn-sm mt-1'
 
             tr
               td
@@ -62,6 +65,7 @@
                             span.position-absolute.pl-2 Weekly
 
                             br
+                            = spinner "start_cron_spinner"
                             input.p-2.pl-3.pr-3.mt-2 type="submit" style="cursor:pointer;" value="Start Automatic Backups"
                 - else
                         = form_tag rsnapshot_backups_engine.stop_automatic_backup_path,\
@@ -87,6 +91,7 @@
                             span.position-absolute.pl-2 Weekly
 
                             br
+                            = spinner "stop_cron_spinner"
                             input.p-2.pl-3.pr-3.mt-2 type="submit" style="cursor:pointer;" value="Stop Automatic Backups"
 
 = javascript_include_tag 'rsnapshot_backups'
