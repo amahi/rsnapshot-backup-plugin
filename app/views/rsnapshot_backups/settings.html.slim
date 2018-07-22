@@ -1,3 +1,12 @@
+css:
+    .open-backup-source-path{
+       background: tranparent;
+    }
+
+    .open-backup-source-path:hover{
+       background: rgb(255,255,153);
+    }
+
 .settings-stretcher
   .share-manage.collapsed-div-style
       fieldset
@@ -21,6 +30,8 @@
                     = spinner "dest_update_spinner"
                     input#backup_destination_submit type="submit" style="cursor:pointer"
                     = link_to t('cancel'), '#', :class => 'close-backup-destination-form cancel-link cancel-btn-style btn-sm'
+                    br
+                    span#dest_update_messages.messages style="display: none"
 
             tr
               td
@@ -45,6 +56,8 @@
                             button.btnn.btn.btn-info.mt-1#submit-update-source-paths name="submit-button" type="submit"  = "Update Paths"
                             button.btnn.btn.btn-info.add-source-path.ml-2.mt-1 name="add-path-button" type="button" = "Add New Path"
                             = link_to t('cancel'), '#', :class => 'align-middle close-backup-source-form cancel-link cancel-btn-style btn-sm mt-1'
+                            br
+                            span#source_update_messages.messages style="display: none"
 
             tr
               td
@@ -54,6 +67,7 @@
                         = form_tag rsnapshot_backups_engine.set_interval_path,\
                           :method => :post,\
                           :remote => true,\
+                          :id => 'set_interval_form_id',\
                           :class => 'set_interval_form'
                             input name="interval" value="daily" type="radio" checked="checked"
                             span.position-absolute.pl-2 Daily
@@ -66,17 +80,21 @@
 
                             br
                             = spinner "start_cron_spinner"
-                            input.p-2.pl-3.pr-3.mt-2 type="submit" style="cursor:pointer;" value="Start Automatic Backups"
+                            input.p-2.pl-3.pr-3.mt-2#start_backup_button type="submit" style="cursor:pointer;" value="Start Automatic Backups"
+                            br
+                            span#interval_update_messages.messages style="display: none"
+
                 - else
                         = form_tag rsnapshot_backups_engine.stop_automatic_backup_path,\
                           :method => :post,\
                           :remote => true,\
+                          :id => 'stop_backup_form_id',\
                           :class => 'stop_backup_form'
                             - if @current_interval == "daily"
                               input name="interval" value="daily" disabled="disabled" type="radio" checked="checked"
                             - else
                               input name="interval" value="daily" disabled="disabled" type="radio"
-                              span.position-absolute.pl-2 Daily
+                            span.position-absolute.pl-2 Daily
                             br
                             - if @current_interval == "hourly"
                               input name="interval" value="hourly" disabled="disabled" type="radio" checked="checked"
@@ -92,6 +110,8 @@
 
                             br
                             = spinner "stop_cron_spinner"
-                            input.p-2.pl-3.pr-3.mt-2 type="submit" style="cursor:pointer;" value="Stop Automatic Backups"
+                            input.p-2.pl-3.pr-3.mt-2#stop_backup_button type="submit" style="cursor:pointer;" value="Stop Automatic Backups"
+                            br
+                            span#stop_cron_messages.messages style="display: none"
 
 = javascript_include_tag 'rsnapshot_backups'

@@ -87,11 +87,110 @@ $(document).on('click', '.add-source-path', function(event) {
 });
 
 $(document).on('ajax:success', '#backup_destination_form_id', function(event, results) {
-    console.log("ajax success1");
+    // show message temporary
+    var messages_span = this.querySelector("#dest_update_messages");
+    if(results["success"]){
+        messages_span.innerHTML = "Succesfully Updated !!";
+        var fixed_span = this.parentElement.previousSibling;
+        var edit_text = this.querySelector("#destination_path");
+        fixed_span.innerHTML=results["set_path"];
+        edit_text.value=results["set_path"];
+    }else{
+        messages_span.innerHTML = results["message"];
+    }
+
+    messages_span.style.display="inline-block";
+    var that=this;
+    setTimeout(function() {
+        messages_span.style.display="none";
+        var cancel_btn = that.querySelector(".close-backup-destination-form");
+        cancel_btn.click();
+
+        var fixed_span = that.parentElement.previousSibling;
+        var edit_text = that.querySelector("#destination_path");
+        edit_text.value=fixed_span.innerHTML;
+    }, 4000);
+
+    var spinner = this.querySelector(".dest_update_spinner");
+    spinner.style.display="none";
 });
 
+function getBackupElement(path){
+    var node = document.createElement('div');
+	node.innerHTML = "<div class='open-backup-source-path focus'><span>"+path+"</span><br></div> <div class='edit-backup-source-div' style='display: none;'><input type='text' name='source_path_input[]' id='source_path_input_' value='"+path+"' placeholder='Select Source Path' class='form-control input-sm increase-length-40' style='display: inline-block; margin-right: 8px;'><img src='/themes/default/images/delete.png' class='delete-source-path' style='cursor: pointer'></div> <br class='field-breaks' style='display:none;'>";
+	return node;
+}
+
 $(document).on('ajax:success', '#backup_source_form_id', function(event, results) {
-    console.log("ajax success2");
+    var messages_span = this.querySelector("#source_update_messages");
+    if(results["success"]){
+        messages_span.innerHTML = "Succesfully Updated !!";
+    }else{
+        messages_span.style.width="100%";
+        messages_span.innerHTML = results["message"];
+    }
+
+    messages_span.style.display="inline-block";
+
+    var that=this;
+    setTimeout(function() {
+        messages_span.style.display="none";
+        var cancel_btn = that.querySelector(".close-backup-source-form");
+        cancel_btn.click();
+
+        if(results["success"]){
+            var sources = results["sources"];
+            while(that.children.length>2){
+               that.children[1].remove();
+            }
+
+            for(var i=0;i<sources.length;i++){
+                var div_element = getBackupElement(sources[i]);
+                for(var j=0; j<div_element.childNodes.length; j++){
+                    that.insertBefore(div_element.childNodes[j], that.children[that.children.length-1]);
+                }
+            }
+        }else{
+            var last_src="";
+            for(var i=0;i<that.children.length;i++){
+                if(that.childNodes[i].className.indexOf("open-backup-source-path")!=-1){
+                    last_src=that.childNodes[i].childNodes[0].innerHTML;
+                }else if(that.childNodes[i].className.indexOf("edit-backup-source-div")!=-1){
+                    that.childNodes[i].childNodes[0].value=last_src;
+                }
+            }
+        }
+
+    }, 4000);
+
+    var spinner = this.querySelector(".source_update_spinner");
+    spinner.style.display="none";
+});
+
+$(document).on('ajax:success', '#set_interval_form_id', function(event, results) {
+	var messages_span = this.querySelector("#interval_update_messages");
+	messages_span.innerHTML = "Automatic Backups Started !!";
+	messages_span.style.display="inline-block";
+
+    setTimeout(function(){
+        window.location.reload();
+    }, 4000);
+
+    var spinner = this.querySelector(".start_cron_spinner");
+    spinner.style.display="none";
+});
+
+$(document).on('ajax:success', '#stop_backup_form_id', function(event, results) {
+	var messages_span = this.querySelector("#stop_cron_messages");
+	messages_span.innerHTML = "Automatic Backups Stopped !!";
+	messages_span.style.display="inline-block";
+
+    setTimeout(function(){
+        window.location.reload();
+    }, 4000);
+
+    var spinner = this.querySelector(".stop_cron_spinner");
+    spinner.style.display="none";
 });
 
 $(document).ready(function() {
@@ -99,6 +198,12 @@ $(document).ready(function() {
       this.previousSibling.style.display = "";
     });
     $("#submit-update-source-paths").click(function() {
+      this.previousSibling.style.display = "";
+    });
+    $("#start_backup_button").click(function() {
+      this.previousSibling.style.display = "";
+    });
+    $("#stop_backup_button").click(function() {
       this.previousSibling.style.display = "";
     });
 });
