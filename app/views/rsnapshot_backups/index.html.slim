@@ -7,6 +7,8 @@
         form.mt-3 action="/tab/rsnapshot_backups/settings"
           button.btnn.btn.btn-info type="submit" = "Edit Configurations"
     - else
+        span.title = "Backup Location: #{@dest_path}"
+        br
         - 4.times do |count|
           span.text-underline.h5 ="Backup # #{count+1}"
           br

@@ -1,0 +1,72 @@
+[2018-07-21T16:00:02] /usr/bin/rsnapshot alpha: started
+[2018-07-21T16:00:02] echo 6974 > /var/run/rsnapshot.pid
+[2018-07-21T16:00:02] mkdir -m 0700 -p /.snapshots/
+[2018-07-21T16:00:02] mkdir -m 0755 -p /.snapshots/alpha.0/
+[2018-07-21T16:00:02] /usr/bin/rsync -a --delete --numeric-ids --relative --delete-excluded /home/ /.snapshots/alpha.0/localhost/
+[2018-07-21T16:00:02] touch /.snapshots/alpha.0/
+[2018-07-21T16:00:02] rm -f /var/run/rsnapshot.pid
+[2018-07-21T16:00:02] /usr/bin/rsnapshot alpha: completed successfully
+[2018-07-21T17:00:03] /usr/bin/rsnapshot alpha: started
+[2018-07-21T17:00:03] echo 10674 > /var/run/rsnapshot.pid
+[2018-07-21T17:00:03] native_cp_al("/.snapshots/alpha.0", "/.snapshots/alpha.1")
+[2018-07-21T17:00:03] /usr/bin/rsync -a --delete --numeric-ids /.snapshots/alpha.0/ /.snapshots/alpha.1/
+[2018-07-21T17:00:03] /usr/bin/rsync -a --delete --numeric-ids --relative --delete-excluded /home/ /.snapshots/alpha.0/localhost/
+[2018-07-21T17:00:04] touch /.snapshots/alpha.0/
+[2018-07-21T17:00:04] rm -f /var/run/rsnapshot.pid
+[2018-07-21T17:00:04] /usr/bin/rsnapshot alpha: completed successfully
+[2018-07-21T23:00:01] /usr/bin/rsnapshot alpha: started
+[2018-07-21T23:00:01] echo 2761 > /var/run/rsnapshot.pid
+[2018-07-21T23:00:01] mv /.snapshots/alpha.1/ /.snapshots/alpha.2/
+[2018-07-21T23:00:01] native_cp_al("/.snapshots/alpha.0", "/.snapshots/alpha.1")
+[2018-07-21T23:00:01] /usr/bin/rsync -a --delete --numeric-ids /.snapshots/alpha.0/ /.snapshots/alpha.1/
+[2018-07-21T23:00:02] /usr/bin/rsync -a --delete --numeric-ids --relative --delete-excluded /home/ /.snapshots/alpha.0/localhost/
+[2018-07-21T23:00:02] touch /.snapshots/alpha.0/
+[2018-07-21T23:00:02] rm -f /var/run/rsnapshot.pid
+[2018-07-21T23:00:02] /usr/bin/rsnapshot alpha: completed successfully
+[2018-07-22T00:00:10] /usr/bin/rsnapshot alpha: started
+[2018-07-22T00:00:10] echo 5543 > /var/run/rsnapshot.pid
+[2018-07-22T00:00:10] mv /.snapshots/alpha.2/ /.snapshots/alpha.3/
+[2018-07-22T00:00:10] mv /.snapshots/alpha.1/ /.snapshots/alpha.2/
+[2018-07-22T00:00:10] native_cp_al("/.snapshots/alpha.0", "/.snapshots/alpha.1")
+[2018-07-22T00:00:10] /usr/bin/rsync -a --delete --numeric-ids /.snapshots/alpha.0/ /.snapshots/alpha.1/
+[2018-07-22T00:00:11] /usr/bin/rsync -a --delete --numeric-ids --relative --delete-excluded /home/ /.snapshots/alpha.0/localhost/
+[2018-07-22T00:00:11] touch /.snapshots/alpha.0/
+[2018-07-22T00:00:11] rm -f /var/run/rsnapshot.pid
+[2018-07-22T00:00:11] /usr/bin/rsnapshot alpha: completed successfully
+[2018-07-22T01:00:01] /usr/bin/rsnapshot alpha: started
+[2018-07-22T01:00:01] echo 7587 > /var/run/rsnapshot.pid
+[2018-07-22T01:00:01] mv /.snapshots/alpha.3/ /.snapshots/alpha.4/
+[2018-07-22T01:00:01] mv /.snapshots/alpha.2/ /.snapshots/alpha.3/
+[2018-07-22T01:00:01] mv /.snapshots/alpha.1/ /.snapshots/alpha.2/
+[2018-07-22T01:00:01] native_cp_al("/.snapshots/alpha.0", "/.snapshots/alpha.1")
+[2018-07-22T01:00:01] /usr/bin/rsync -a --delete --numeric-ids /.snapshots/alpha.0/ /.snapshots/alpha.1/
+[2018-07-22T01:00:01] /usr/bin/rsync -a --delete --numeric-ids --relative --delete-excluded /home/ /.snapshots/alpha.0/localhost/
+[2018-07-22T01:00:01] touch /.snapshots/alpha.0/
+[2018-07-22T01:00:01] rm -f /var/run/rsnapshot.pid
+[2018-07-22T01:00:01] /usr/bin/rsnapshot alpha: completed successfully
+[2018-07-22T02:00:04] /usr/bin/rsnapshot alpha: started
+[2018-07-22T02:00:04] echo 9889 > /var/run/rsnapshot.pid
+[2018-07-22T02:00:04] mv /.snapshots/alpha.4/ /.snapshots/alpha.5/
+[2018-07-22T02:00:04] mv /.snapshots/alpha.3/ /.snapshots/alpha.4/
+[2018-07-22T02:00:04] mv /.snapshots/alpha.2/ /.snapshots/alpha.3/
+[2018-07-22T02:00:04] mv /.snapshots/alpha.1/ /.snapshots/alpha.2/
+[2018-07-22T02:00:04] native_cp_al("/.snapshots/alpha.0", "/.snapshots/alpha.1")
+[2018-07-22T02:00:04] /usr/bin/rsync -a --delete --numeric-ids /.snapshots/alpha.0/ /.snapshots/alpha.1/
+[2018-07-22T02:00:05] /usr/bin/rsync -a --delete --numeric-ids --relative --delete-excluded /home/ /.snapshots/alpha.0/localhost/
+[2018-07-22T02:00:05] touch /.snapshots/alpha.0/
+[2018-07-22T02:00:05] rm -f /var/run/rsnapshot.pid
+[2018-07-22T02:00:05] /usr/bin/rsnapshot alpha: completed successfully
+[2018-07-22T14:00:01] /usr/bin/rsnapshot alpha: started
+[2018-07-22T14:00:01] echo 1638 > /var/run/rsnapshot.pid
+[2018-07-22T14:00:01] /usr/bin/rm -rf /.snapshots/alpha.5/
+[2018-07-22T14:00:01] mv /.snapshots/alpha.4/ /.snapshots/alpha.5/
+[2018-07-22T14:00:01] mv /.snapshots/alpha.3/ /.snapshots/alpha.4/
+[2018-07-22T14:00:01] mv /.snapshots/alpha.2/ /.snapshots/alpha.3/
+[2018-07-22T14:00:01] mv /.snapshots/alpha.1/ /.snapshots/alpha.2/
+[2018-07-22T14:00:01] native_cp_al("/.snapshots/alpha.0", "/.snapshots/alpha.1")
+[2018-07-22T14:00:01] /usr/bin/rsync -a --delete --numeric-ids /.snapshots/alpha.0/ /.snapshots/alpha.1/
+[2018-07-22T14:00:01] /usr/bin/rsync -a --delete --numeric-ids --relative --delete-excluded /home/ /.snapshots/alpha.0/localhost/
+[2018-07-22T14:00:01] touch /.snapshots/alpha.0/
+[2018-07-22T14:00:01] rm -f /var/run/rsnapshot.pid
+[2018-07-22T14:00:01] /usr/bin/rsnapshot alpha: completed successfully
+

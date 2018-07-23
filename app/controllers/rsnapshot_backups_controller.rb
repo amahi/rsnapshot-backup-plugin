@@ -8,6 +8,7 @@ class RsnapshotBackupsController < ApplicationController
 		@page_title = t('rsnapshot_backups')
 		RsnapshotHelper.run_init_script if RsnapshotHelper.first_time_setup
 		@cron_job_status = CronTabHelper.check_status
+		@dest_path = RsnapshotHelper.get_fields("snapshot_root")
 	end
 
 	def settings
