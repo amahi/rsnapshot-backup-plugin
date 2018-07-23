@@ -15,19 +15,6 @@ class RsnapshotLogUtil
 			Rails.root+Dir["plugins/*rsnapshot_backups/db/sample-data/sample-rsnapshot-log"][0]
 		end
 
-		def get_created_backup_counts
-			type_counts = {"alpha":0, "beta":0, "gamma":0}
-			dest_path = RsnapshotHelper.get_fields("snapshot_root")[0][0]
-
-			Dir.open(dest_path).each do |filename|
-				type_counts[:alpha]=type_counts[:alpha]+1   unless filename.to_s.index("alpha").blank?
-				type_counts[:beta]=type_counts[:beta]+1     unless filename.to_s.index("beta").blank?
-				type_counts[:gamma]=type_counts[:gamma]+1   unless filename.to_s.index("gamma").blank?
-			end
-
-			type_counts
-		end
-
 		def parse_log_file
 			log_enteries = []
 			File.open(get_sample_log_file_path, "r").each do |line|
@@ -70,11 +57,9 @@ class RsnapshotLogUtil
 			log_enteries = self.parse_log_file
 			dest_path = RsnapshotHelper.get_fields("snapshot_root")[0][0]
 
-			backup_folder_counts = self.get_created_backup_counts
-
-			alpha_limit = (6<=backup_folder_counts[:alpha])? 6 : backup_folder_counts[:alpha]
-			beta_limit = (7<=backup_folder_counts[:beta])? 7 : backup_folder_counts[:beta]
-			gamma_limit = (4<=backup_folder_counts[:gamma])? 4 : backup_folder_counts[:gamma]
+			alpha_limit = 6
+			beta_limit = 7
+			gamma_limit = 4
 
 			alpha_count = beta_count = gamma_count = 0
 
