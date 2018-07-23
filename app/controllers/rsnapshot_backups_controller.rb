@@ -1,5 +1,6 @@
 require "rsnapshot_backups/rsnapshot_helper.rb"
 require "rsnapshot_backups/crontab_helper.rb"
+require "rsnapshot_backups/rsnapshot_log_util.rb"
 
 class RsnapshotBackupsController < ApplicationController
 	before_action :admin_required
@@ -9,6 +10,7 @@ class RsnapshotBackupsController < ApplicationController
 		RsnapshotHelper.run_init_script if RsnapshotHelper.first_time_setup
 		@cron_job_status = CronTabHelper.check_status
 		@dest_path = RsnapshotHelper.get_fields("snapshot_root")
+		@logs = RsnapshotLogUtil.get_log_output
 	end
 
 	def settings

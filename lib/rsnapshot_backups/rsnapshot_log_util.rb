@@ -15,23 +15,17 @@ class RsnapshotLogUtil
 			Rails.root+Dir["plugins/*rsnapshot_backups/db/sample-data/sample-rsnapshot-log"][0]
 		end
 
-		def get_created_backup_names
-			folder_names = []
+		def get_created_backup_counts
 			type_counts = {"alpha":0, "beta":0, "gamma":0}
-			dest_path = RsnapshotHelper.get_fields("snapshot_root")
+			dest_path = RsnapshotHelper.get_fields("snapshot_root")[0][0]
 
 			Dir.open(dest_path).each do |filename|
-				folder_names << filename if File.directory? filename
-				if filename.to_s.index("alpha")!=-1
-					type_counts[:alpha]=type_counts[:alpha]+1
-				elsif filename.to_s.index("beta")!=-1
-					type_counts[:beta]=type_counts[:beta]+1
-				elsif filename.to_s.index("gamma")!=-1
-					type_counts[:gamma]=type_counts[:gamma]+1
-				end
+				type_counts[:alpha]=type_counts[:alpha]+1   unless filename.to_s.index("alpha").blank?
+				type_counts[:beta]=type_counts[:beta]+1     unless filename.to_s.index("beta").blank?
+				type_counts[:gamma]=type_counts[:gamma]+1   unless filename.to_s.index("gamma").blank?
 			end
 
-			return { folder_names: folder_names, counts: type_counts }
+			type_counts
 		end
 
 		def parse_log_file
@@ -74,13 +68,13 @@ class RsnapshotLogUtil
 
 		def get_log_output
 			log_enteries = self.parse_log_file
-			dest_path = RsnapshotHelper.get_fields("snapshot_root")
+			dest_path = RsnapshotHelper.get_fields("snapshot_root")[0][0]
 
-			backup_folder_counts = self.get_created_backup_names[:counts]
+			backup_folder_counts = self.get_created_backup_counts
 
-			alpha_limit = [6, backup_folder_counts[:alpha]].min
-			beta_limit = [7, backup_folder_counts[:beta].min
-			gamma_limit = [4, backup_folder_counts[:gamma]].min
+			alpha_limit = (6<=backup_folder_counts[:alpha])? 6 : backup_folder_counts[:alpha]
+			beta_limit = (7<=backup_folder_counts[:beta])? 7 : backup_folder_counts[:beta]
+			gamma_limit = (4<=backup_folder_counts[:gamma])? 4 : backup_folder_counts[:gamma]
 
 			alpha_count = beta_count = gamma_count = 0
 
@@ -89,16 +83,19 @@ class RsnapshotLogUtil
 				if entry[:type] == "alpha"
 					if alpha_count < alpha_limit && entry[:location] == dest_path
 						alpha_count = alpha_count+1
+						entry[:location] = entry[:location]+"alpha.#{alpha_count-1}/"
 						output << entry
 					end
 				elsif entry[:type] == "beta"
 					if beta_count < beta_limit && entry[:location] == dest_path
 						beta_count = beta_count+1
+						entry[:location] = entry[:location]+"beta.#{beta_count-1}/"
 						output << entry
 					end
 				elsif entry[:type] == "gamma"
 					if gamma_count < gamma_limit && entry[:location] == dest_path
 						gamma_count = gamma_count+1
+						entry[:location] = entry[:location]+"gamma.#{gamma_count-1}/"
 						output << entry
 					end
 				end
