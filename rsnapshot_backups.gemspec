@@ -5,11 +5,11 @@ require "rsnapshot_backups/version"
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
-  s.name        = "rsnapshot_backups"
+  s.name        = "amahi_backups"
   s.version     = RsnapshotBackup::VERSION
   s.authors     = ["sukhbir singh"]
   s.email       = ["sukhbir947@gmail.com"]
-  s.homepage    = "http://www.amahi.org/apps/yourapp"
+  s.homepage    = "http://www.amahi.org/apps/amahi_backups"
   s.license     = "AGPLv3"
   s.summary     = %{Amahi plugin to create incremental backups using rsnaphot periodically.}
   s.description = %{This is an Amahi 11 platform plugin that creates periodic backups using rsnapshot tool.}

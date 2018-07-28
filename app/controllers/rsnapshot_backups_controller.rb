@@ -6,15 +6,15 @@ class RsnapshotBackupsController < ApplicationController
 	before_action :admin_required
 
 	def index
-		@page_title = t('rsnapshot_backups')
+		@page_title = t('amahi_backups')
 		RsnapshotHelper.run_init_script if RsnapshotHelper.first_time_setup
 		@cron_job_status = CronTabHelper.check_status
 		@dest_path = RsnapshotHelper.get_fields("snapshot_root")
-		@logs = RsnapshotLogUtil.get_log_output
+		@logs = @cron_job_status? RsnapshotLogUtil.get_log_output : nil
 	end
 
 	def settings
-		@page_title = t('rsnapshot_backups')
+		@page_title = t('amahi_backups')
 		@dest_path = RsnapshotHelper.get_fields("snapshot_root")
 		@backup_paths = RsnapshotHelper.get_fields("backup")
 		@cron_job_status = CronTabHelper.check_status
