@@ -175,15 +175,30 @@ class RsnapshotHelper
 			response
 		end
 
-		def path_format_checker(paths)
+		def formatted_path(paths)
+			return paths if paths.blank?
+			if paths.class == Array
+				new_paths = []
+				paths.each do |path|
+					path = "/"+path if path[0]!="/"
+					path = path+"/" if path[-1]!="/"
+					new_paths << path
+				end
+				return new_paths
+			else
+				paths = "/"+paths if paths[0]!="/"
+				paths = paths+"/" if paths[-1]!="/"
+				return paths
+			end
+		end
+
+		def check_if_path_exists(paths)
 			if paths.class == Array
 				paths.each do |path|
-					return false unless path[0]=="/" and path[path.length-1]=="/"
 					return false unless File.exists?(path)
 				end
 				return true
 			else
-				return false unless paths[0]=="/" and paths[paths.length-1]=="/"
 				return File.exists?(paths)
 			end
 		end

@@ -76,11 +76,11 @@ css:
                             input name="interval" value="daily" type="checkbox" checked="checked"
                             span.position-absolute.pl-2 Daily
                             br
-                            input name="interval" value="hourly" type="checkbox"
-                            span.position-absolute.pl-2 Hourly
-                            br
                             input name="interval" value="weekly" type="checkbox"
                             span.position-absolute.pl-2 Weekly
+                            br
+                            input name="interval" value="Monthly" type="checkbox"
+                            span.position-absolute.pl-2 Monthly
 
                 - else
                         = form_tag rsnapshot_backups_engine.stop_automatic_backup_path,\
