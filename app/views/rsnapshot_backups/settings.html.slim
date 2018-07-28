@@ -7,11 +7,15 @@ css:
        background: rgb(255,255,153);
     }
 
+    tr td:first-child{
+      vertical-align: top;
+    }
+
 .settings-stretcher
   .share-manage.collapsed-div-style
       fieldset
         legend
-          | Edit Rsnapshot Settings
+          | Edit Settings
 
         .settings-fields
           table
@@ -61,7 +65,7 @@ css:
 
             tr
               td
-                label #{"Interval"}
+                label #{"Repeat Duration"}
               td
                 - unless @cron_job_status
                         = form_tag rsnapshot_backups_engine.set_interval_path,\
@@ -69,18 +73,18 @@ css:
                           :remote => true,\
                           :id => 'set_interval_form_id',\
                           :class => 'set_interval_form'
-                            input name="interval" value="daily" type="radio" checked="checked"
+                            input name="interval" value="daily" type="checkbox" checked="checked"
                             span.position-absolute.pl-2 Daily
                             br
-                            input name="interval" value="hourly" type="radio"
+                            input name="interval" value="hourly" type="checkbox"
                             span.position-absolute.pl-2 Hourly
                             br
-                            input name="interval" value="weekly" type="radio"
+                            input name="interval" value="weekly" type="checkbox"
                             span.position-absolute.pl-2 Weekly
 
                             br
                             = spinner "start_cron_spinner"
-                            input.p-2.pl-3.pr-3.mt-2#start_backup_button type="submit" style="cursor:pointer;" value="Start Automatic Backups"
+                            input.p-2.pl-3.pr-3.mt-2#start_backup_button type="submit" style="cursor:pointer;" value="Start Backups"
                             br
                             span#interval_update_messages.messages style="display: none"
 
@@ -91,27 +95,29 @@ css:
                           :id => 'stop_backup_form_id',\
                           :class => 'stop_backup_form'
                             - if @current_interval == "daily"
-                              input name="interval" value="daily" disabled="disabled" type="radio" checked="checked"
+                              input name="interval" value="daily" disabled="disabled" type="checkbox" checked="checked"
                             - else
-                              input name="interval" value="daily" disabled="disabled" type="radio"
+                              input name="interval" value="daily" disabled="disabled" type="checkbox"
                             span.position-absolute.pl-2 Daily
                             br
-                            - if @current_interval == "hourly"
-                              input name="interval" value="hourly" disabled="disabled" type="radio" checked="checked"
-                            - else
-                              input name="interval" value="hourly" disabled="disabled" type="radio"
-                            span.position-absolute.pl-2 Hourly
-                            br
                             - if @current_interval == "weekly"
-                              input name="interval" value="weekly" disabled="disabled" type="radio" checked="checked"
+                              input name="interval" value="weekly" disabled="disabled" type="checkbox" checked="checked"
                             - else
-                              input name="interval" value="weekly" disabled="disabled" type="radio"
+                              input name="interval" value="weekly" disabled="disabled" type="checkbox"
                             span.position-absolute.pl-2 Weekly
+                            br
+                            - if @current_interval == "monthly"
+                              input name="interval" value="monthly" disabled="disabled" type="checkbox" checked="checked"
+                            - else
+                              input name="interval" value="monthly" disabled="disabled" type="checkbox"
+                            span.position-absolute.pl-2 Monthly
 
-                            br
-                            = spinner "stop_cron_spinner"
-                            input.p-2.pl-3.pr-3.mt-2#stop_backup_button type="submit" style="cursor:pointer;" value="Stop Automatic Backups"
-                            br
-                            span#stop_cron_messages.messages style="display: none"
+        div style="margin-left:120px;"
+          = spinner "stop_cron_spinner"
+          input.p-2.pl-3.pr-3.mt-2#stop_backup_button type="submit" style="cursor:pointer;" value="Stop Backups"
+          br
+          span#stop_cron_messages.messages style="display: none"
+          br
 
 = javascript_include_tag 'rsnapshot_backups'
+

@@ -1,6 +1,6 @@
 # human readable name (no localization supported yet)
-name: RsnapshotBackup
+name: AmahiBackups
 # class to be mounted
 class: RsnapshotBackups
 # root url where this plugin will be mounted
-url: /tab/rsnapshot_backups
+url: /tab/amahi_backups
