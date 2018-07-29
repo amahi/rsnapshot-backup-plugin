@@ -209,21 +209,25 @@ $(document).ready(function() {
 });
 
 $(document).on('click', '#start_backups_button', function(event) {
-    var current = event.target;
-    current.previousSibling.style.display = "";
-    var submit_btn=document.getElementById("start_backups");
-    submit_btn.click();
+    if (confirm('This will start the automatic backups of the folders entered, with the periodicity selected above. Are you sure you want to continue?')) {
+        var current = event.target;
+        current.previousSibling.style.display = "";
+        var submit_btn=document.getElementById("start_backups");
+        submit_btn.click();
+    }
 });
 
 $(document).on('click', '#stop_backups_button', function(event) {
-    var current=event.target;
-    current.previousSibling.style.display = "";
-    var form=document.getElementById("start_backups_form_id");
-    var action=form.action;
-    action=action.replace("start_backups","stop_backups");
-    form.action=action;
-    var submit_btn=document.getElementById("start_backups");
-    submit_btn.click();
+    if (confirm('This will stop the automatic backups currenly running. Are you sure you want to continue?')) {
+        var current=event.target;
+        current.previousSibling.style.display = "";
+        var form=document.getElementById("start_backups_form_id");
+        var action=form.action;
+        action=action.replace("start_backups","stop_backups");
+        form.action=action;
+        var submit_btn=document.getElementById("start_backups");
+        submit_btn.click();
+    }
 });
 
 $(document).on('ajax:success', '#start_backups_form_id', function(event, results) {
@@ -240,4 +244,19 @@ $(document).on('ajax:success', '#start_backups_form_id', function(event, results
 
     var spinner = document.getElementsByClassName("start_backups_spinner")[0];
     spinner.style.display="none";
+});
+
+$(document).on('change', '.repeat_duration', function(event, results) {
+    var stop_btn = document.getElementById("stop_backups_button");
+    if(stop_btn != null){
+        var type = event.target.checked;
+        var interval = event.target.value;
+        document.getElementById("interval_text").value=interval;
+        document.getElementById("update_type").value=type;
+        var submit_btn=document.getElementById("update_interval_btn");
+        submit_btn.click();
+
+        var spinner = event.target.nextSibling.nextSibling;
+        spinner.style.display="";
+    }
 });

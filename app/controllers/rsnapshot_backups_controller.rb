@@ -66,4 +66,10 @@ class RsnapshotBackupsController < ApplicationController
 		render :json => {success: true, message: "Backups Stopped Successfully !!"}
 	end
 
+	def update_interval
+		#params[:interval]
+		#params[:type]
+
+	end
+
 end
