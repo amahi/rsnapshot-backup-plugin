@@ -209,6 +209,35 @@ $(document).ready(function() {
 });
 
 $(document).on('click', '#start_backups_button', function(event) {
+    var current = event.target;
+    current.previousSibling.style.display = "";
     var submit_btn=document.getElementById("start_backups");
     submit_btn.click();
+});
+
+$(document).on('click', '#stop_backups_button', function(event) {
+    var current=event.target;
+    current.previousSibling.style.display = "";
+    var form=document.getElementById("start_backups_form_id");
+    var action=form.action;
+    action=action.replace("start_backups","stop_backups");
+    form.action=action;
+    var submit_btn=document.getElementById("start_backups");
+    submit_btn.click();
+});
+
+$(document).on('ajax:success', '#start_backups_form_id', function(event, results) {
+    var messages_span = document.getElementById("start_backups_messages");
+    messages_span.innerHTML = results["message"]
+    messages_span.style.display="inline-block";
+
+    setTimeout(function(){
+        if(results["success"]){
+            window.location.reload();
+        }
+        messages_span.style.display="none";
+    }, 4000);
+
+    var spinner = document.getElementsByClassName("start_backups_spinner")[0];
+    spinner.style.display="none";
 });

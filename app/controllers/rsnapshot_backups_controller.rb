@@ -18,7 +18,7 @@ class RsnapshotBackupsController < ApplicationController
 		@dest_path = RsnapshotHelper.get_fields("snapshot_root")
 		@backup_paths = RsnapshotHelper.get_fields("backup")
 		@cron_job_status = CronTabHelper.check_status
-		@current_intervals = @cron_job_status? [CronTabHelper.get_cron_interval] : nil
+		@current_intervals = CronTabHelper.get_cron_intervals
 	end
 
 	def update_backup_directory
@@ -51,24 +51,19 @@ class RsnapshotBackupsController < ApplicationController
 		end
 	end
 
-	def update_interval
-		CronTabHelper.add_cron(params[:interval])
-	end
-
-	def stop_automatic_backup
-		CronTabHelper.remove_cron
-	end
-
 	def start_backups
 		intervals = params[:interval]
-		if intervals.size == 0
+		if intervals.blank? or intervals.size == 0
 			render :json => {success: false, message: "Error: Select atleast one 'Repeat Duration' to start backups"}
 		else
-			render :json => {success: success, message: "Backups Started Successfully !!"}
+			CronTabHelper.add_crons(intervals)
+			render :json => {success: true, message: "Backups Started Successfully !!"}
 		end
 	end
 
 	def stop_backups
+		CronTabHelper.remove_all_crons
+		render :json => {success: true, message: "Backups Stopped Successfully !!"}
 	end
 
 end
