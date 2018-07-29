@@ -67,50 +67,35 @@ css:
               td
                 label #{"Repeat Duration"}
               td
-                - unless @cron_job_status
-                        = form_tag rsnapshot_backups_engine.set_interval_path,\
-                          :method => :post,\
-                          :remote => true,\
-                          :id => 'set_interval_form_id',\
-                          :class => 'set_interval_form'
-                            input name="interval" value="daily" type="checkbox" checked="checked"
-                            span.position-absolute.pl-2 Daily
-                            br
-                            input name="interval" value="weekly" type="checkbox"
-                            span.position-absolute.pl-2 Weekly
-                            br
-                            input name="interval" value="Monthly" type="checkbox"
-                            span.position-absolute.pl-2 Monthly
-
-                - else
-                        = form_tag rsnapshot_backups_engine.stop_automatic_backup_path,\
-                          :method => :post,\
-                          :remote => true,\
-                          :id => 'stop_backup_form_id',\
-                          :class => 'stop_backup_form'
-                            - if @current_interval == "daily"
-                              input name="interval" value="daily" disabled="disabled" type="checkbox" checked="checked"
-                            - else
-                              input name="interval" value="daily" disabled="disabled" type="checkbox"
-                            span.position-absolute.pl-2 Daily
-                            br
-                            - if @current_interval == "weekly"
-                              input name="interval" value="weekly" disabled="disabled" type="checkbox" checked="checked"
-                            - else
-                              input name="interval" value="weekly" disabled="disabled" type="checkbox"
-                            span.position-absolute.pl-2 Weekly
-                            br
-                            - if @current_interval == "monthly"
-                              input name="interval" value="monthly" disabled="disabled" type="checkbox" checked="checked"
-                            - else
-                              input name="interval" value="monthly" disabled="disabled" type="checkbox"
-                            span.position-absolute.pl-2 Monthly
+                = form_tag rsnapshot_backups_engine.start_backups_path,\
+                  :method => :post,\
+                  :remote => true,\
+                  :id => 'start_backups_form_id',\
+                  :class => 'start_backups_form'
+                    - if @current_intervals.blank? or @current_intervals.include?("daily")
+                      input name="interval[]" value="daily" type="checkbox" checked="checked"
+                    - else
+                      input name="interval[]" value="daily" type="checkbox"
+                    span.position-absolute.pl-2 Daily
+                    br
+                    - if !@current_intervals.blank? and @current_intervals.include?("weekly")
+                      input name="interval[]" value="weekly" type="checkbox" checked="checked"
+                    - else
+                      input name="interval[]" value="weekly" type="checkbox"
+                    span.position-absolute.pl-2 Weekly
+                    br
+                    - if !@current_intervals.blank? and @current_intervals.include?("monthly")
+                      input name="interval[]" value="monthly" type="checkbox" checked="checked"
+                    - else
+                      input name="interval[]" value="monthly" type="checkbox"
+                    span.position-absolute.pl-2 Monthly
+                    input.p-2.pl-3.pr-3.mt-2#start_backups type="submit" style="display: none;" value="Start Backups"
 
         div style="margin-left:120px;"
-          = spinner "stop_cron_spinner"
-          input.p-2.pl-3.pr-3.mt-2#stop_backup_button type="submit" style="cursor:pointer;" value="Stop Backups"
+          = spinner "start_backups_spinner"
+          input.p-2.pl-3.pr-3.mt-2#start_backups_button type="button" style="cursor:pointer;" value="Start Backups"
           br
-          span#stop_cron_messages.messages style="display: none"
+          span#start_backups_messages.messages style="display: none"
           br
 
 = javascript_include_tag 'rsnapshot_backups'

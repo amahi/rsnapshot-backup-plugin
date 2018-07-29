@@ -207,3 +207,8 @@ $(document).ready(function() {
       this.previousSibling.style.display = "";
     });
 });
+
+$(document).on('click', '#start_backups_button', function(event) {
+    var submit_btn=document.getElementById("start_backups");
+    submit_btn.click();
+});
