@@ -66,4 +66,16 @@ class RsnapshotBackupsController < ApplicationController
 		render :json => {success: true, message: "Backups Stopped Successfully !!"}
 	end
 
+	def update_interval
+		type = params[:type]
+		interval = params[:interval]
+		if type == "true"
+			CronTabHelper.add_cron(interval)
+		else
+			CronTabHelper.remove_cron(interval)
+		end
+		render :json => {success: true, message: "Successfully Updated !!",
+			interval: interval, type: type}
+	end
+
 end

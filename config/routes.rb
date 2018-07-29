@@ -7,5 +7,5 @@ RsnapshotBackups::Engine.routes.draw do
 	post 'set_interval' => 'rsnapshot_backups#update_interval'
 	post 'start_backups' => 'rsnapshot_backups#start_backups'
 	post 'stop_backups' => 'rsnapshot_backups#stop_backups'
-
+	post 'update_interval' => 'rsnapshot_backups#update_interval'
 end

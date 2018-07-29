@@ -11,6 +11,12 @@ css:
       vertical-align: top;
     }
 
+    .interval_spinner{
+      position: absolute;
+      margin-top: -8px;
+      margin-left: 65px;
+    }
+
 .settings-stretcher
   .share-manage.collapsed-div-style
       fieldset
@@ -73,23 +79,36 @@ css:
                   :id => 'start_backups_form_id',\
                   :class => 'start_backups_form'
                     - if @current_intervals.blank? or @current_intervals.include?("daily")
-                      input name="interval[]" value="daily" type="checkbox" checked="checked"
+                      input.repeat_duration name="interval[]" value="daily" type="checkbox" checked="checked"
                     - else
-                      input name="interval[]" value="daily" type="checkbox"
+                      input.repeat_duration name="interval[]" value="daily" type="checkbox"
                     span.position-absolute.pl-2 Daily
+                    = spinner "interval_spinner"
                     br
                     - if !@current_intervals.blank? and @current_intervals.include?("weekly")
-                      input name="interval[]" value="weekly" type="checkbox" checked="checked"
+                      input.repeat_duration name="interval[]" value="weekly" type="checkbox" checked="checked"
                     - else
-                      input name="interval[]" value="weekly" type="checkbox"
+                      input.repeat_duration name="interval[]" value="weekly" type="checkbox"
                     span.position-absolute.pl-2 Weekly
+                    = spinner "interval_spinner"
                     br
                     - if !@current_intervals.blank? and @current_intervals.include?("monthly")
-                      input name="interval[]" value="monthly" type="checkbox" checked="checked"
+                      input.repeat_duration name="interval[]" value="monthly" type="checkbox" checked="checked"
                     - else
-                      input name="interval[]" value="monthly" type="checkbox"
+                      input.repeat_duration name="interval[]" value="monthly" type="checkbox"
                     span.position-absolute.pl-2 Monthly
+                    = spinner "interval_spinner"
+
                     input.p-2.pl-3.pr-3.mt-2#start_backups type="submit" style="display: none;" value="Start Backups"
+
+        = form_tag rsnapshot_backups_engine.update_interval_path,\
+          :method => :post,\
+          :remote => true,\
+          :style => 'display: none;',\
+          :id => 'update_interval_form_id'
+            input#interval_text type="text" name="interval" value=""
+            input#update_type type="text" name="type" value=""
+            input#update_interval_btn type="submit" style="display: none;" value="Update Interval"
 
         div style="margin-left:120px;"
           = spinner "start_backups_spinner"
