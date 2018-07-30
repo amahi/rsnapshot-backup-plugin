@@ -17,7 +17,7 @@
           br
 
           - alert_type = "alert-danger"
-          - alert_type = "alert-success" if log[:end_message] == "completed successfully"
+          - alert_type = "alert-success" unless log[:end_message].index("completed successfully").blank?
           - alert_type = "alert-warning" if log[:end_message].blank?
 
           div class="alert #{alert_type} mt-2" role="alert"
@@ -28,15 +28,11 @@
             - else
               span = "Finished at: #{log[:end_time]}"
 
-            br
-            span = "Location: #{log[:location]}"
+            br.d-none
+            span.d-none = "Location: #{log[:location]}"
             br
 
-            - @type = "Daily"
-            - @type = "Weekly" if log[:type] == "gamma"
-            - @type = "Hourly" if log[:type] == "alpha"
-
-            span = "Type: #{@type}"
+            span.text-capitalize = "Type: #{log[:type]}"
             br
             - if log[:end_message].blank?
               span.text-capitalize = "Status: Incomplete Backup"
