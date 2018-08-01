@@ -25,7 +25,7 @@ class RsnapshotBackupsController < ApplicationController
 		dest_path = RsnapshotHelper.formatted_path(params[:destination_path])
 		if RsnapshotHelper.check_if_path_exists(dest_path)
 			RsnapshotHelper.update_conf("snapshot_root", dest_path)
-			render :json => {success: true, set_path: dest_path}
+			render :json => {success: true, set_path: dest_path, message: "Updated"}
 		else
 			render :json => {success: false, message: "Error: Path '#{dest_path}' do not exist."}
 		end
@@ -45,7 +45,7 @@ class RsnapshotBackupsController < ApplicationController
 				RsnapshotHelper.add_conf("backup", [source, "./"])
 			end
 
-			render :json => {success: true, message: "Backup Paths Set Successfully.", sources: sources}
+			render :json => {success: true, message: "Updated", sources: sources}
 		else
 			render :json => {success: false, message: "Error: One or more paths do not exist."}
 		end
@@ -57,13 +57,13 @@ class RsnapshotBackupsController < ApplicationController
 			render :json => {success: false, message: "Error: Select atleast one 'Repeat Duration' to start backups"}
 		else
 			CronTabHelper.add_crons(intervals)
-			render :json => {success: true, message: "Backups Started Successfully !!"}
+			render :json => {success: true, message: "Backups Scheduled"}
 		end
 	end
 
 	def stop_backups
 		CronTabHelper.remove_all_crons
-		render :json => {success: true, message: "Backups Stopped Successfully !!"}
+		render :json => {success: true, message: "Backups Stopped"}
 	end
 
 	def update_interval
@@ -74,7 +74,7 @@ class RsnapshotBackupsController < ApplicationController
 		else
 			CronTabHelper.remove_cron(interval)
 		end
-		render :json => {success: true, message: "Successfully Updated !!",
+		render :json => {success: true, message: "Updated",
 			interval: interval, type: type}
 	end
 

@@ -180,6 +180,7 @@ class RsnapshotHelper
 			if paths.class == Array
 				new_paths = []
 				paths.each do |path|
+					next if path.size == 0
 					path = "/"+path if path[0]!="/"
 					path = path+"/" if path[-1]!="/"
 					new_paths << path
@@ -195,6 +196,7 @@ class RsnapshotHelper
 		def check_if_path_exists(paths)
 			if paths.class == Array
 				paths.each do |path|
+					return false if path.size == 0
 					return false unless File.exists?(path)
 				end
 				return true

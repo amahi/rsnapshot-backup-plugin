@@ -89,17 +89,21 @@ $(document).on('click', '.add-source-path', function(event) {
 $(document).on('ajax:success', '#backup_destination_form_id', function(event, results) {
     // show message temporary
     var messages_span = this.querySelector("#dest_update_messages");
+    messages_span.innerHTML = results["message"];
+
     if(results["success"]){
-        messages_span.innerHTML = "Succesfully Updated !!";
+        messages_span.style.color="green";
         var fixed_span = this.parentElement.previousSibling;
         var edit_text = this.querySelector("#destination_path");
-        fixed_span.innerHTML=results["set_path"];
-        edit_text.value=results["set_path"];
+        fixed_span.innerHTML = results["set_path"];
+        edit_text.value = results["set_path"];
     }else{
-        messages_span.innerHTML = results["message"];
+        messages_span.style.color="#a44";
     }
 
-    messages_span.style.display="inline-block";
+    messages_span.style.display = "inline-block";
+    messages_span.style.width = "100%";
+
     var that=this;
     setTimeout(function() {
         messages_span.style.display="none";
@@ -123,11 +127,13 @@ function getBackupElement(path){
 
 $(document).on('ajax:success', '#backup_source_form_id', function(event, results) {
     var messages_span = this.querySelector("#source_update_messages");
+    messages_span.innerHTML = results["message"];
+
     if(results["success"]){
-        messages_span.innerHTML = "Succesfully Updated !!";
+        messages_span.style.color="green";
     }else{
+        messages_span.style.color="#a44";
         messages_span.style.width="100%";
-        messages_span.innerHTML = results["message"];
     }
 
     messages_span.style.display="inline-block";
@@ -167,23 +173,11 @@ $(document).on('ajax:success', '#backup_source_form_id', function(event, results
     spinner.style.display="none";
 });
 
-$(document).on('ajax:success', '#set_interval_form_id', function(event, results) {
-	var messages_span = this.querySelector("#interval_update_messages");
-	messages_span.innerHTML = "Automatic Backups Started !!";
-	messages_span.style.display="inline-block";
-
-    setTimeout(function(){
-        window.location.reload();
-    }, 4000);
-
-    var spinner = this.querySelector(".start_cron_spinner");
-    spinner.style.display="none";
-});
-
 $(document).on('ajax:success', '#stop_backup_form_id', function(event, results) {
-	var messages_span = this.querySelector("#stop_cron_messages");
-	messages_span.innerHTML = "Automatic Backups Stopped !!";
-	messages_span.style.display="inline-block";
+    var messages_span = this.querySelector("#stop_cron_messages");
+    messages_span.innerHTML = results["message"];
+    messages_span.style.display="inline-block";
+    messages_span.style.color="green";
 
     setTimeout(function(){
         window.location.reload();
@@ -209,7 +203,7 @@ $(document).ready(function() {
 });
 
 $(document).on('click', '#start_backups_button', function(event) {
-    if (confirm('This will start the automatic backups of the folders entered, with the periodicity selected above. Are you sure you want to continue?')) {
+    if (confirm('This will start the automatic backups of the folders entered, with the periodicity selected. Are you sure you want to continue?')) {
         var current = event.target;
         current.previousSibling.style.display = "";
         var submit_btn=document.getElementById("start_backups");
@@ -234,6 +228,12 @@ $(document).on('ajax:success', '#start_backups_form_id', function(event, results
     var messages_span = document.getElementById("start_backups_messages");
     messages_span.innerHTML = results["message"]
     messages_span.style.display="inline-block";
+
+    if(results["success"]){
+        messages_span.style.color="green";
+    }else{
+        messages_span.style.color="#a44";
+    }
 
     setTimeout(function(){
         if(results["success"]){
