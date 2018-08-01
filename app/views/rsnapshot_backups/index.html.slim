@@ -17,7 +17,7 @@
           br
 
           - alert_type = "alert-danger"
-          - alert_type = "alert-success" unless log[:end_message].index("completed successfully").blank?
+          - alert_type = "alert-success" unless log[:end_message].blank? or log[:end_message].index("completed successfully").blank?
           - alert_type = "alert-warning" if log[:end_message].blank?
 
           div class="alert #{alert_type} mt-2" role="alert"

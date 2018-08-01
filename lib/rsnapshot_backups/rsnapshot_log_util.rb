@@ -5,7 +5,9 @@ include ActionView::Helpers::DateHelper
 class RsnapshotLogUtil
 	class << self
 		def parse_datetime_string(string)
-			DateTime.parse(string).ctime
+			parsed = DateTime.parse(string).strftime('%a, %d %b %Y %H:%M:%S')
+			ago_duration = time_ago_in_words(parsed).capitalize
+			parsed + " (#{ago_duration} ago)"
 		end
 
 		def get_log_file_path
@@ -18,6 +20,8 @@ class RsnapshotLogUtil
 
 		def parse_log_file
 			log_enteries = []
+			return log_enteries unless File.exists?(get_log_file_path)
+
 			File.open(get_log_file_path, "r").each do |line|
 				if line =~ /\[.*\] \/bin\/rsnapshot (daily|weekly|monthly): .*/
 
