@@ -38,7 +38,7 @@ css:
                   :id => 'backup_destination_form_id' do |f|
                     = text_field_tag 'destination_path', "#{@dest_path[0][0]}", :placeholder => 'Select Destination Path', :class=>'form-control input-sm increase-length-40', :style=>'display: inline-block; margin-right: 8px; '
                     = spinner "dest_update_spinner"
-                    input#backup_destination_submit type="submit" style="cursor:pointer"
+                    input#backup_destination_submit type="submit" value="Save" style="cursor:pointer"
                     = link_to t('cancel'), '#', :class => 'close-backup-destination-form cancel-link cancel-btn-style btn-sm'
                     br
                     span#dest_update_messages.messages style="display: none"
