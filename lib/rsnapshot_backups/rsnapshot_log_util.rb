@@ -1,5 +1,6 @@
 require "date"
 require "rsnapshot_backups/rsnapshot_helper.rb"
+include ActionView::Helpers::DateHelper
 
 class RsnapshotLogUtil
 	class << self
@@ -52,15 +53,6 @@ class RsnapshotLogUtil
 						log_enteries.pop()
 						log_enteries << last_entry
 					end
-				end
-
-				unless line.index("touch").blank?
-					last_entry = log_enteries.last
-					initial_index=28
-					last_index=line[0..-3].rindex("/")
-					last_entry[:location]=line[initial_index..last_index]
-					log_enteries.pop()
-					log_enteries << last_entry
 				end
 
 			end

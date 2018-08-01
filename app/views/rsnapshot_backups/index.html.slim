@@ -22,20 +22,15 @@
 
           div class="alert #{alert_type} mt-2" role="alert"
             span = "Started at: #{log[:start_time]}"
+            span.text-capitalize.float-right = "Type: #{log[:type]}"
             br
             - if log[:end_time].blank?
               span = "Finished at: Not available"
             - else
               span = "Finished at: #{log[:end_time]}"
 
-            br.d-none
-            span.d-none = "Location: #{log[:location]}"
-            br
-
-            span.text-capitalize = "Type: #{log[:type]}"
-            br
             - if log[:end_message].blank?
-              span.text-capitalize = "Status: Incomplete Backup"
+              span.text-capitalize.float-right = "Status: Incomplete Backup"
             - else
-              span.text-capitalize = "Status: #{log[:end_message]}"
+              span.text-capitalize.float-right = "Status: #{log[:end_message]}"
             br

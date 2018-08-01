@@ -1,72 +1,117 @@
-[2018-07-21T16:00:02] /usr/bin/rsnapshot alpha: started
-[2018-07-21T16:00:02] echo 6974 > /var/run/rsnapshot.pid
-[2018-07-21T16:00:02] mkdir -m 0700 -p /.snapshots/
-[2018-07-21T16:00:02] mkdir -m 0755 -p /.snapshots/alpha.0/
-[2018-07-21T16:00:02] /usr/bin/rsync -a --delete --numeric-ids --relative --delete-excluded /home/ /.snapshots/alpha.0/localhost/
-[2018-07-21T16:00:02] touch /.snapshots/alpha.0/
-[2018-07-21T16:00:02] rm -f /var/run/rsnapshot.pid
-[2018-07-21T16:00:02] /usr/bin/rsnapshot alpha: completed successfully
-[2018-07-21T17:00:03] /usr/bin/rsnapshot alpha: started
-[2018-07-21T17:00:03] echo 10674 > /var/run/rsnapshot.pid
-[2018-07-21T17:00:03] native_cp_al("/.snapshots/alpha.0", "/.snapshots/alpha.1")
-[2018-07-21T17:00:03] /usr/bin/rsync -a --delete --numeric-ids /.snapshots/alpha.0/ /.snapshots/alpha.1/
-[2018-07-21T17:00:03] /usr/bin/rsync -a --delete --numeric-ids --relative --delete-excluded /home/ /.snapshots/alpha.0/localhost/
-[2018-07-21T17:00:04] touch /.snapshots/alpha.0/
-[2018-07-21T17:00:04] rm -f /var/run/rsnapshot.pid
-[2018-07-21T17:00:04] /usr/bin/rsnapshot alpha: completed successfully
-[2018-07-21T23:00:01] /usr/bin/rsnapshot alpha: started
-[2018-07-21T23:00:01] echo 2761 > /var/run/rsnapshot.pid
-[2018-07-21T23:00:01] mv /.snapshots/alpha.1/ /.snapshots/alpha.2/
-[2018-07-21T23:00:01] native_cp_al("/.snapshots/alpha.0", "/.snapshots/alpha.1")
-[2018-07-21T23:00:01] /usr/bin/rsync -a --delete --numeric-ids /.snapshots/alpha.0/ /.snapshots/alpha.1/
-[2018-07-21T23:00:02] /usr/bin/rsync -a --delete --numeric-ids --relative --delete-excluded /home/ /.snapshots/alpha.0/localhost/
-[2018-07-21T23:00:02] touch /.snapshots/alpha.0/
-[2018-07-21T23:00:02] rm -f /var/run/rsnapshot.pid
-[2018-07-21T23:00:02] /usr/bin/rsnapshot alpha: completed successfully
-[2018-07-22T00:00:10] /usr/bin/rsnapshot alpha: started
-[2018-07-22T00:00:10] echo 5543 > /var/run/rsnapshot.pid
-[2018-07-22T00:00:10] mv /.snapshots/alpha.2/ /.snapshots/alpha.3/
-[2018-07-22T00:00:10] mv /.snapshots/alpha.1/ /.snapshots/alpha.2/
-[2018-07-22T00:00:10] native_cp_al("/.snapshots/alpha.0", "/.snapshots/alpha.1")
-[2018-07-22T00:00:10] /usr/bin/rsync -a --delete --numeric-ids /.snapshots/alpha.0/ /.snapshots/alpha.1/
-[2018-07-22T00:00:11] /usr/bin/rsync -a --delete --numeric-ids --relative --delete-excluded /home/ /.snapshots/alpha.0/localhost/
-[2018-07-22T00:00:11] touch /.snapshots/alpha.0/
-[2018-07-22T00:00:11] rm -f /var/run/rsnapshot.pid
-[2018-07-22T00:00:11] /usr/bin/rsnapshot alpha: completed successfully
-[2018-07-22T01:00:01] /usr/bin/rsnapshot alpha: started
-[2018-07-22T01:00:01] echo 7587 > /var/run/rsnapshot.pid
-[2018-07-22T01:00:01] mv /.snapshots/alpha.3/ /.snapshots/alpha.4/
-[2018-07-22T01:00:01] mv /.snapshots/alpha.2/ /.snapshots/alpha.3/
-[2018-07-22T01:00:01] mv /.snapshots/alpha.1/ /.snapshots/alpha.2/
-[2018-07-22T01:00:01] native_cp_al("/.snapshots/alpha.0", "/.snapshots/alpha.1")
-[2018-07-22T01:00:01] /usr/bin/rsync -a --delete --numeric-ids /.snapshots/alpha.0/ /.snapshots/alpha.1/
-[2018-07-22T01:00:01] /usr/bin/rsync -a --delete --numeric-ids --relative --delete-excluded /home/ /.snapshots/alpha.0/localhost/
-[2018-07-22T01:00:01] touch /.snapshots/alpha.0/
-[2018-07-22T01:00:01] rm -f /var/run/rsnapshot.pid
-[2018-07-22T01:00:01] /usr/bin/rsnapshot alpha: completed successfully
-[2018-07-22T02:00:04] /usr/bin/rsnapshot alpha: started
-[2018-07-22T02:00:04] echo 9889 > /var/run/rsnapshot.pid
-[2018-07-22T02:00:04] mv /.snapshots/alpha.4/ /.snapshots/alpha.5/
-[2018-07-22T02:00:04] mv /.snapshots/alpha.3/ /.snapshots/alpha.4/
-[2018-07-22T02:00:04] mv /.snapshots/alpha.2/ /.snapshots/alpha.3/
-[2018-07-22T02:00:04] mv /.snapshots/alpha.1/ /.snapshots/alpha.2/
-[2018-07-22T02:00:04] native_cp_al("/.snapshots/alpha.0", "/.snapshots/alpha.1")
-[2018-07-22T02:00:04] /usr/bin/rsync -a --delete --numeric-ids /.snapshots/alpha.0/ /.snapshots/alpha.1/
-[2018-07-22T02:00:05] /usr/bin/rsync -a --delete --numeric-ids --relative --delete-excluded /home/ /.snapshots/alpha.0/localhost/
-[2018-07-22T02:00:05] touch /.snapshots/alpha.0/
-[2018-07-22T02:00:05] rm -f /var/run/rsnapshot.pid
-[2018-07-22T02:00:05] /usr/bin/rsnapshot alpha: completed successfully
-[2018-07-22T14:00:01] /usr/bin/rsnapshot alpha: started
-[2018-07-22T14:00:01] echo 1638 > /var/run/rsnapshot.pid
-[2018-07-22T14:00:01] /usr/bin/rm -rf /.snapshots/alpha.5/
-[2018-07-22T14:00:01] mv /.snapshots/alpha.4/ /.snapshots/alpha.5/
-[2018-07-22T14:00:01] mv /.snapshots/alpha.3/ /.snapshots/alpha.4/
-[2018-07-22T14:00:01] mv /.snapshots/alpha.2/ /.snapshots/alpha.3/
-[2018-07-22T14:00:01] mv /.snapshots/alpha.1/ /.snapshots/alpha.2/
-[2018-07-22T14:00:01] native_cp_al("/.snapshots/alpha.0", "/.snapshots/alpha.1")
-[2018-07-22T14:00:01] /usr/bin/rsync -a --delete --numeric-ids /.snapshots/alpha.0/ /.snapshots/alpha.1/
-[2018-07-22T14:00:01] /usr/bin/rsync -a --delete --numeric-ids --relative --delete-excluded /home/ /.snapshots/alpha.0/localhost/
-[2018-07-22T14:00:01] touch /.snapshots/alpha.0/
-[2018-07-22T14:00:01] rm -f /var/run/rsnapshot.pid
-[2018-07-22T14:00:01] /usr/bin/rsnapshot alpha: completed successfully
-
+[2018-07-30T20:57:13] /bin/rsnapshot daily: started
+[2018-07-30T20:57:13] echo 7165 > /var/run/rsnapshot.pid
+[2018-07-30T20:57:13] mv /.snapshots/daily.2/ /.snapshots/daily.3/
+[2018-07-30T20:57:13] mv /.snapshots/daily.1/ /.snapshots/daily.2/
+[2018-07-30T20:57:13] native_cp_al("/.snapshots/daily.0", "/.snapshots/daily.1")
+[2018-07-30T20:57:14] /usr/bin/rsync -a --delete --numeric-ids /.snapshots/daily.0/ /.snapshots/daily.1/
+[2018-07-30T20:57:14] /usr/bin/rsync -a --delete --numeric-ids --relative --delete-excluded /home/ /.snapshots/daily.0/./
+[2018-07-30T20:57:14] /usr/bin/rsync -a --delete --numeric-ids --relative --delete-excluded /var/hda/files/books/ /.snapshots/daily.0/./
+[2018-07-30T20:57:14] /usr/bin/rsync -a --delete --numeric-ids --relative --delete-excluded /var/hda/files/custom/ /.snapshots/daily.0/./
+[2018-07-30T20:57:14] /usr/bin/rsync -a --delete --numeric-ids --relative --delete-excluded /var/hda/files/docs/ /.snapshots/daily.0/./
+[2018-07-30T20:57:14] /usr/bin/rsync -a --delete --numeric-ids --relative --delete-excluded /var/hda/files/movies/ /.snapshots/daily.0/./
+[2018-07-30T20:57:14] /usr/bin/rsync -a --delete --numeric-ids --relative --delete-excluded /var/hda/files/music/ /.snapshots/daily.0/./
+[2018-07-30T20:57:14] /usr/bin/rsync -a --delete --numeric-ids --relative --delete-excluded /var/hda/files/pictures/ /.snapshots/daily.0/./
+[2018-07-30T20:57:14] /usr/bin/rsync -a --delete --numeric-ids --relative --delete-excluded /var/hda/files/public/ /.snapshots/daily.0/./
+[2018-07-30T20:57:14] /usr/bin/rsync -a --delete --numeric-ids --relative --delete-excluded /var/hda/files/tv/ /.snapshots/daily.0/./
+[2018-07-30T20:57:14] /usr/bin/rsync -a --delete --numeric-ids --relative --delete-excluded /var/hda/files/videos/ /.snapshots/daily.0/./
+[2018-07-30T20:57:14] touch /.snapshots/daily.0/
+[2018-07-30T20:57:14] rm -f /var/run/rsnapshot.pid
+[2018-07-30T20:57:14] /bin/rsnapshot daily: completed successfully
+[2018-07-30T20:57:19] /bin/rsnapshot weekly: started
+[2018-07-30T20:57:19] echo 7205 > /var/run/rsnapshot.pid
+[2018-07-30T20:57:19] /.snapshots/daily.13 not present (yet), nothing to copy
+[2018-07-30T20:57:19] rm -f /var/run/rsnapshot.pid
+[2018-07-30T20:57:19] /bin/rsnapshot weekly: completed successfully
+[2018-07-30T20:57:22] /bin/rsnapshot daily: started
+[2018-07-30T20:57:22] echo 7211 > /var/run/rsnapshot.pid
+[2018-07-30T20:57:22] mv /.snapshots/daily.3/ /.snapshots/daily.4/
+[2018-07-30T20:57:22] mv /.snapshots/daily.2/ /.snapshots/daily.3/
+[2018-07-30T20:57:22] mv /.snapshots/daily.1/ /.snapshots/daily.2/
+[2018-07-30T20:57:22] native_cp_al("/.snapshots/daily.0", "/.snapshots/daily.1")
+[2018-07-30T20:57:22] /usr/bin/rsync -a --delete --numeric-ids /.snapshots/daily.0/ /.snapshots/daily.1/
+[2018-07-30T20:57:22] /usr/bin/rsync -a --delete --numeric-ids --relative --delete-excluded /home/ /.snapshots/daily.0/./
+[2018-07-30T20:57:22] /usr/bin/rsync -a --delete --numeric-ids --relative --delete-excluded /var/hda/files/books/ /.snapshots/daily.0/./
+[2018-07-30T20:57:22] /usr/bin/rsync -a --delete --numeric-ids --relative --delete-excluded /var/hda/files/custom/ /.snapshots/daily.0/./
+[2018-07-30T20:57:22] /usr/bin/rsync -a --delete --numeric-ids --relative --delete-excluded /var/hda/files/docs/ /.snapshots/daily.0/./
+[2018-07-30T20:57:22] /usr/bin/rsync -a --delete --numeric-ids --relative --delete-excluded /var/hda/files/movies/ /.snapshots/daily.0/./
+[2018-07-30T20:57:22] /usr/bin/rsync -a --delete --numeric-ids --relative --delete-excluded /var/hda/files/music/ /.snapshots/daily.0/./
+[2018-07-30T20:57:22] /usr/bin/rsync -a --delete --numeric-ids --relative --delete-excluded /var/hda/files/pictures/ /.snapshots/daily.0/./
+[2018-07-30T20:57:22] /usr/bin/rsync -a --delete --numeric-ids --relative --delete-excluded /var/hda/files/public/ /.snapshots/daily.0/./
+[2018-07-30T20:57:22] /usr/bin/rsync -a --delete --numeric-ids --relative --delete-excluded /var/hda/files/tv/ /.snapshots/daily.0/./
+[2018-07-30T20:57:22] /usr/bin/rsync -a --delete --numeric-ids --relative --delete-excluded /var/hda/files/videos/ /.snapshots/daily.0/./
+[2018-07-30T20:57:22] touch /.snapshots/daily.0/
+[2018-07-30T20:57:22] rm -f /var/run/rsnapshot.pid
+[2018-07-30T20:57:22] /bin/rsnapshot daily: completed successfully
+[2018-07-30T20:57:23] /bin/rsnapshot daily: started
+[2018-07-30T20:57:23] echo 7246 > /var/run/rsnapshot.pid
+[2018-07-30T20:57:23] mv /.snapshots/daily.4/ /.snapshots/daily.5/
+[2018-07-30T20:57:23] mv /.snapshots/daily.3/ /.snapshots/daily.4/
+[2018-07-30T20:57:23] mv /.snapshots/daily.2/ /.snapshots/daily.3/
+[2018-07-30T20:57:23] mv /.snapshots/daily.1/ /.snapshots/daily.2/
+[2018-07-30T20:57:23] native_cp_al("/.snapshots/daily.0", "/.snapshots/daily.1")
+[2018-07-30T20:57:23] /usr/bin/rsync -a --delete --numeric-ids /.snapshots/daily.0/ /.snapshots/daily.1/
+[2018-07-30T20:57:23] /usr/bin/rsync -a --delete --numeric-ids --relative --delete-excluded /home/ /.snapshots/daily.0/./
+[2018-07-30T20:57:23] /usr/bin/rsync -a --delete --numeric-ids --relative --delete-excluded /var/hda/files/books/ /.snapshots/daily.0/./
+[2018-07-30T20:57:23] /usr/bin/rsync -a --delete --numeric-ids --relative --delete-excluded /var/hda/files/custom/ /.snapshots/daily.0/./
+[2018-07-30T20:57:23] /usr/bin/rsync -a --delete --numeric-ids --relative --delete-excluded /var/hda/files/docs/ /.snapshots/daily.0/./
+[2018-07-30T20:57:23] /usr/bin/rsync -a --delete --numeric-ids --relative --delete-excluded /var/hda/files/movies/ /.snapshots/daily.0/./
+[2018-07-30T20:57:23] /usr/bin/rsync -a --delete --numeric-ids --relative --delete-excluded /var/hda/files/music/ /.snapshots/daily.0/./
+[2018-07-30T20:57:23] /usr/bin/rsync -a --delete --numeric-ids --relative --delete-excluded /var/hda/files/pictures/ /.snapshots/daily.0/./
+[2018-07-30T20:57:23] /usr/bin/rsync -a --delete --numeric-ids --relative --delete-excluded /var/hda/files/public/ /.snapshots/daily.0/./
+[2018-07-30T20:57:23] /usr/bin/rsync -a --delete --numeric-ids --relative --delete-excluded /var/hda/files/tv/ /.snapshots/daily.0/./
+[2018-07-30T20:57:23] /usr/bin/rsync -a --delete --numeric-ids --relative --delete-excluded /var/hda/files/videos/ /.snapshots/daily.0/./
+[2018-07-30T20:57:23] touch /.snapshots/daily.0/
+[2018-07-30T20:57:23] rm -f /var/run/rsnapshot.pid
+[2018-07-30T20:57:23] /bin/rsnapshot daily: completed successfully
+[2018-07-30T20:57:28] /bin/rsnapshot monthly: started
+[2018-07-30T20:57:28] echo 7286 > /var/run/rsnapshot.pid
+[2018-07-30T20:57:28] mv /.snapshots/monthly.2/ /.snapshots/monthly.3/
+[2018-07-30T20:57:28] mv /.snapshots/monthly.0/ /.snapshots/monthly.1/
+[2018-07-30T20:57:28] /.snapshots/weekly.7 not present (yet), nothing to copy
+[2018-07-30T20:57:28] rm -f /var/run/rsnapshot.pid
+[2018-07-30T20:57:28] /bin/rsnapshot monthly: completed successfully
+[2018-07-31T11:48:03] /bin/rsnapshot daily: started
+[2018-07-31T11:48:03] echo 4634 > /var/run/rsnapshot.pid
+[2018-07-31T11:48:03] mv /.snapshots/daily.5/ /.snapshots/daily.6/
+[2018-07-31T11:48:03] mv /.snapshots/daily.4/ /.snapshots/daily.5/
+[2018-07-31T11:48:03] mv /.snapshots/daily.3/ /.snapshots/daily.4/
+[2018-07-31T11:48:03] mv /.snapshots/daily.2/ /.snapshots/daily.3/
+[2018-07-31T11:48:03] mv /.snapshots/daily.1/ /.snapshots/daily.2/
+[2018-07-31T11:48:03] native_cp_al("/.snapshots/daily.0", "/.snapshots/daily.1")
+[2018-07-31T11:48:03] /usr/bin/rsync -a --delete --numeric-ids /.snapshots/daily.0/ /.snapshots/daily.1/
+[2018-07-31T11:48:03] /usr/bin/rsync -a --delete --numeric-ids --relative --delete-excluded /home/ /.snapshots/daily.0/./
+[2018-07-31T11:48:04] /usr/bin/rsync -a --delete --numeric-ids --relative --delete-excluded /var/hda/files/books/ /.snapshots/daily.0/./
+[2018-07-31T11:48:04] /usr/bin/rsync -a --delete --numeric-ids --relative --delete-excluded /var/hda/files/custom/ /.snapshots/daily.0/./
+[2018-07-31T11:48:04] /usr/bin/rsync -a --delete --numeric-ids --relative --delete-excluded /var/hda/files/docs/ /.snapshots/daily.0/./
+[2018-07-31T11:48:04] /usr/bin/rsync -a --delete --numeric-ids --relative --delete-excluded /var/hda/files/movies/ /.snapshots/daily.0/./
+[2018-07-31T11:48:04] /usr/bin/rsync -a --delete --numeric-ids --relative --delete-excluded /var/hda/files/music/ /.snapshots/daily.0/./
+[2018-07-31T11:48:04] /usr/bin/rsync -a --delete --numeric-ids --relative --delete-excluded /var/hda/files/pictures/ /.snapshots/daily.0/./
+[2018-07-31T11:48:04] /usr/bin/rsync -a --delete --numeric-ids --relative --delete-excluded /var/hda/files/public/ /.snapshots/daily.0/./
+[2018-07-31T11:48:04] /usr/bin/rsync -a --delete --numeric-ids --relative --delete-excluded /var/hda/files/tv/ /.snapshots/daily.0/./
+[2018-07-31T11:48:04] /usr/bin/rsync -a --delete --numeric-ids --relative --delete-excluded /var/hda/files/videos/ /.snapshots/daily.0/./
+[2018-07-31T11:48:04] touch /.snapshots/daily.0/
+[2018-07-31T11:48:04] rm -f /var/run/rsnapshot.pid
+[2018-07-31T11:48:04] /bin/rsnapshot daily: completed successfully
+[2018-08-01T14:39:02] /bin/rsnapshot daily: started
+[2018-08-01T14:39:02] echo 2870 > /var/run/rsnapshot.pid
+[2018-08-01T14:39:02] mv /.snapshots/daily.6/ /.snapshots/daily.7/
+[2018-08-01T14:39:02] mv /.snapshots/daily.5/ /.snapshots/daily.6/
+[2018-08-01T14:39:02] mv /.snapshots/daily.4/ /.snapshots/daily.5/
+[2018-08-01T14:39:02] mv /.snapshots/daily.3/ /.snapshots/daily.4/
+[2018-08-01T14:39:02] mv /.snapshots/daily.2/ /.snapshots/daily.3/
+[2018-08-01T14:39:02] mv /.snapshots/daily.1/ /.snapshots/daily.2/
+[2018-08-01T14:39:02] native_cp_al("/.snapshots/daily.0", "/.snapshots/daily.1")
+[2018-08-01T14:39:02] /usr/bin/rsync -a --delete --numeric-ids /.snapshots/daily.0/ /.snapshots/daily.1/
+[2018-08-01T14:39:03] /usr/bin/rsync -a --delete --numeric-ids --relative --delete-excluded /home/ /.snapshots/daily.0/./
+[2018-08-01T14:39:03] /usr/bin/rsync -a --delete --numeric-ids --relative --delete-excluded /var/hda/files/books/ /.snapshots/daily.0/./
+[2018-08-01T14:39:03] /usr/bin/rsync -a --delete --numeric-ids --relative --delete-excluded /var/hda/files/custom/ /.snapshots/daily.0/./
+[2018-08-01T14:39:03] /usr/bin/rsync -a --delete --numeric-ids --relative --delete-excluded /var/hda/files/docs/ /.snapshots/daily.0/./
+[2018-08-01T14:39:03] /usr/bin/rsync -a --delete --numeric-ids --relative --delete-excluded /var/hda/files/movies/ /.snapshots/daily.0/./
+[2018-08-01T14:39:03] /usr/bin/rsync -a --delete --numeric-ids --relative --delete-excluded /var/hda/files/music/ /.snapshots/daily.0/./
+[2018-08-01T14:39:03] /usr/bin/rsync -a --delete --numeric-ids --relative --delete-excluded /var/hda/files/pictures/ /.snapshots/daily.0/./
+[2018-08-01T14:39:03] /usr/bin/rsync -a --delete --numeric-ids --relative --delete-excluded /var/hda/files/public/ /.snapshots/daily.0/./
+[2018-08-01T14:39:03] /usr/bin/rsync -a --delete --numeric-ids --relative --delete-excluded /var/hda/files/tv/ /.snapshots/daily.0/./
+[2018-08-01T14:39:03] /usr/bin/rsync -a --delete --numeric-ids --relative --delete-excluded /var/hda/files/videos/ /.snapshots/daily.0/./
+[2018-08-01T14:39:03] touch /.snapshots/daily.0/
+[2018-08-01T14:39:03] rm -f /var/run/rsnapshot.pid
+[2018-08-01T14:39:03] /bin/rsnapshot daily: completed successfully
