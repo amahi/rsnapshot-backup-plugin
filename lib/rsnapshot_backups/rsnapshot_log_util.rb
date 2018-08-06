@@ -23,9 +23,10 @@ class RsnapshotLogUtil
 			return log_enteries unless File.exists?(get_log_file_path)
 
 			File.open(get_log_file_path, "r").each do |line|
+				line.gsub!("WARNING: ","")
 				if line =~ /\[.*\] \/bin\/rsnapshot (daily|weekly|monthly): .*/
 
-					unless line.index("started").blank?
+					unless line.index("started").nil?
 						type = nil
 						start_message = nil
 						if !(line.index("daily").nil?)

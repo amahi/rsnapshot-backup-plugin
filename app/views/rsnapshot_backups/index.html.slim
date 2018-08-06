@@ -16,9 +16,9 @@
           - count = count + 1
           br
 
-          - alert_type = "alert-danger"
-          - alert_type = "alert-success" unless log[:end_message].blank? or log[:end_message].index("completed successfully").blank?
-          - alert_type = "alert-warning" if log[:end_message].blank?
+          - alert_type = "alert-warning"
+          - alert_type = "alert-success" if !(log[:end_message].blank?) and !(log[:end_message].index("completed successfully").nil?)
+          - alert_type = "alert-danger" if !(log[:end_message].blank?) and (!(log[:end_message].index("error").nil?) or !(log[:end_message].index("ERROR").nil?))
 
           div class="alert #{alert_type} mt-2" role="alert"
             span = "Started at: #{log[:start_time]}"
