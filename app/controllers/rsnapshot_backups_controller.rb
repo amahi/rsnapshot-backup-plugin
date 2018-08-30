@@ -10,7 +10,16 @@ class RsnapshotBackupsController < ApplicationController
 		RsnapshotHelper.run_init_script if RsnapshotHelper.first_time_setup
 		@cron_job_status = CronTabHelper.check_status
 		@dest_path = RsnapshotHelper.get_fields("snapshot_root")
-		@logs = @cron_job_status? RsnapshotLogUtil.get_log_output : nil
+		@logs, @skip_lines = @cron_job_status? RsnapshotLogUtil.get_last_entries : nil
+	end
+
+	def get_next_entries
+		unless params[:skip_lines].blank?
+			logs, skip_lines = RsnapshotLogUtil.get_last_entries(params[:skip_lines])
+			render :json => {success: true, logs: logs, skip_lines: skip_lines}
+		else
+			render :json => {success: false, message: "Error: params missing"}
+		end
 	end
 
 	def settings
