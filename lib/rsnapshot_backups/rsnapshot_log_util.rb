@@ -74,10 +74,15 @@ class RsnapshotLogUtil
 			log_enteries = []
 			return log_enteries unless File.exists?(get_log_file_path)
 
+			from_line = from_line.to_i
 			skip_lines = 0
 
 			Elif.open(get_log_file_path, "r").each do |line|
-				skip_lines = skip_lines+1
+				skip_lines = skip_lines + 1
+
+				unless from_line.blank?
+					next if skip_lines <= from_line
+				end
 
 				line.gsub!("WARNING: ","")
 				if line =~ /\[.*\] \/bin\/rsnapshot (daily|weekly|monthly): .*/
