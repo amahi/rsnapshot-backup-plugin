@@ -1,3 +1,4 @@
+
 $(document).on('click', '.open-backup-destination-path', function(event) {
 	var current = event.target;
 	current.style.display = "none";
@@ -277,3 +278,58 @@ $(document).on('ajax:success', '#update_interval_form_id', function(event, resul
     }
 });
 
+function getLogElement(log){
+    var node = document.createElement('div');
+    var count = document.getElementsByClassName("log-details").length;
+
+    var alert_type = "alert-warning";
+    if(log["end_message"].indexOf("completed successfully")!=-1){
+        alert_type = "alert-success";
+    }
+    if(log["end_message"].indexOf("error")!=-1 || log["end_message"].indexOf("ERROR")!=-1){
+        alert_type = "alert-danger";
+    }
+
+    node.innerHTML = "<span class='text-underline h5'>Backup # "+(count+1)+"</span> <br> <div class='alert "+alert_type+" mt-2 log-details' role='alert'><span>Started at: "+log["start_time"]+"</span><span class='text-capitalize float-right'>Type: "+log["type"]+"</span><br><span>Finished at: "+log["end_time"]+"</span><span class='text-capitalize float-right'>Status: "+log["end_message"]+"</span><br></div>";
+    return node;
+}
+
+$(document).on('click', '#load_more_btn', function(event) {
+    var element = event.target.parentElement;
+    var next = element.nextSibling;
+
+    if(element){
+        element.style.display = "none";
+    }
+    if(next){
+        next.style.display = "";
+    }
+
+    var value = document.getElementById("skip_lines_span").innerHTML;
+
+    $.get("/tab/amahi_backups/next_entries?skip_lines="+value, function(data, status){
+        if(element){
+            element.style.display = "";
+        }
+        if(next){
+            next.style.display = "none";
+        }
+
+        if(status=="success"){
+            document.getElementById("skip_lines_span").innerHTML = data["skip_lines"];
+
+            if(data["logs"].length<10){
+                element.style.display = "none";
+            }
+
+            for(var k=0;k<data["logs"].length;k++){
+                var log_element = getLogElement(data["logs"][k]);
+
+                for(var j=0; j<log_element.childNodes.length; j++){
+                    element.parentElement.parentElement.insertBefore(log_element.childNodes[j], element.parentElement.parentElement.children[element.parentElement.parentElement.children.length-1]);
+                }
+
+            }
+        }
+    });
+});
